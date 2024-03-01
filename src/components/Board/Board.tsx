@@ -1,10 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Board = () => {
     return (
         <>
+            <div className='container mt-10 mx-auto px-8 relative h-16'>
+                <div className='absolute bottom-0 right-0 '>
+                    <Link to='/createpost'>
+                        <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
+                            Create Post
+                        </button>
+                    </Link>
+                </div>
+            </div>
             <div
-                style={{ border: "2px solid #E9F7E6", borderRadius: "10px", marginTop: "50px" }}
+                style={{ border: "2px solid #E9F7E6", borderRadius: "10px", marginTop: "10px" }}
                 className='container mx-auto px-8 py-8'
             >
                 <div className='grid grid-cols-1 gap-5'>
