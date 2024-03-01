@@ -10,12 +10,14 @@ const Board = () => {
                 <div className='grid grid-cols-1 gap-5'>
                     <div style={{ borderBottom: "2px solid #E8F2FE" }} className=''>
                         <div className='flex justify-between px-4 py-10'>
-                            <div className='flex flex-col'>
-                                <h1 className='text-2xl font-bold tracking-wide'>JAVASCRIPT</h1>
+                            <div style={{ width: "100%" }} className='flex flex-col'>
+                                <div className='flex items-center justify-between '>
+                                    <h1 className='text-2xl font-bold tracking-wide'>JAVASCRIPT</h1>
+                                    <div>
+                                        <h1 className='text-l font-medium'>Future Hendrix</h1>
+                                    </div>
+                                </div>
                                 <p className='font-light tracking-wide'>April 15, 2024 </p>
-                            </div>
-                            <div>
-                                <h1 className='text-l font-medium'>Future Hendrix</h1>
                             </div>
                         </div>
                     </div>
@@ -23,38 +25,44 @@ const Board = () => {
                 <div className='grid grid-cols-1 gap-5'>
                     <div style={{ borderBottom: "2px solid #E8F2FE" }} className=''>
                         <div className='flex justify-between px-4 py-10'>
-                            <div className='flex flex-col'>
-                                <h1 className='text-2xl font-bold tracking-wide'>REACT</h1>
+                            <div style={{ width: "100%" }} className='flex flex-col'>
+                                <div className='flex items-center justify-between '>
+                                    <h1 className='text-2xl font-bold tracking-wide'>JAVASCRIPT</h1>
+                                    <div>
+                                        <h1 className='text-l font-medium'>Future Hendrix</h1>
+                                    </div>
+                                </div>
                                 <p className='font-light tracking-wide'>April 15, 2024 </p>
-                            </div>
-                            <div>
-                                <h1 className='text-l font-medium'>JOHN DOPE</h1>
                             </div>
                         </div>
                     </div>
-                </div>{" "}
+                </div>
                 <div className='grid grid-cols-1 gap-5'>
                     <div style={{ borderBottom: "2px solid #E8F2FE" }} className=''>
                         <div className='flex justify-between px-4 py-10'>
-                            <div className='flex flex-col'>
-                                <h1 className='text-2xl font-bold tracking-wide'>CHATGPT</h1>
+                            <div style={{ width: "100%" }} className='flex flex-col'>
+                                <div className='flex items-center justify-between '>
+                                    <h1 className='text-2xl font-bold tracking-wide'>JAVASCRIPT</h1>
+                                    <div>
+                                        <h1 className='text-l font-medium'>Future Hendrix</h1>
+                                    </div>
+                                </div>
                                 <p className='font-light tracking-wide'>April 15, 2024 </p>
-                            </div>
-                            <div>
-                                <h1 className='text-l font-medium'>LIL UZI BURT</h1>
                             </div>
                         </div>
                     </div>
-                </div>{" "}
+                </div>
                 <div className='grid grid-cols-1 gap-5'>
                     <div style={{ borderBottom: "2px solid #E8F2FE" }} className=''>
                         <div className='flex justify-between px-4 py-10'>
-                            <div className='flex flex-col'>
-                                <h1 className='text-2xl font-bold tracking-wide'>HOOKS IN REACT</h1>
+                            <div style={{ width: "100%" }} className='flex flex-col'>
+                                <div className='flex items-center justify-between '>
+                                    <h1 className='text-2xl font-bold tracking-wide'>JAVASCRIPT</h1>
+                                    <div>
+                                        <h1 className='text-l font-medium'>Future Hendrix</h1>
+                                    </div>
+                                </div>
                                 <p className='font-light tracking-wide'>April 15, 2024 </p>
-                            </div>
-                            <div>
-                                <h1 className='text-l font-medium'>JIMMY SOSA</h1>
                             </div>
                         </div>
                     </div>
