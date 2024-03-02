@@ -17,6 +17,10 @@ const CreatePost = () => {
     };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (isTitle.length <= 0 && valueHtml.length <= 0) {
+            alert("You must enter a post!");
+        }
         const objToSubmit = {
             subject: isTitle,
             content: valueHtml,
