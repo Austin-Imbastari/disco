@@ -24,10 +24,11 @@ const CreatePost = () => {
     };
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setTitle(e.target.value);
+        const value = e.target.value;
+        setTitle(value);
         setValueHtml({
             ...valueHtml,
-            title: isTitle,
+            title: value,
             text: valueHtml.text,
         });
     };
