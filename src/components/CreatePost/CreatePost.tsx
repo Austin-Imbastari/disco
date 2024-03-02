@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -9,6 +10,10 @@ const CreatePost = () => {
         setValueHtml(value);
         console.log(valueHtml);
     };
+
+    useEffect(() => {
+        handleEditorChange(valueHtml);
+    }, [valueHtml]);
 
     return (
         <>
