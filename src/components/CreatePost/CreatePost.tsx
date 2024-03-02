@@ -22,12 +22,17 @@ const CreatePost = () => {
             text: value,
         });
     };
-    console.log(valueHtml);
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTitle(e.target.value);
+        setValueHtml({
+            ...valueHtml,
+            title: isTitle,
+            text: valueHtml.text,
+        });
     };
 
+    console.log(valueHtml);
     return (
         <>
             <div className='mt-20'></div>
