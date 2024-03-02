@@ -8,12 +8,9 @@ const CreatePost = () => {
 
     const handleEditorChange = (value: string) => {
         setValueHtml(value);
-        console.log(valueHtml);
     };
 
-    useEffect(() => {
-        handleEditorChange(valueHtml);
-    }, [valueHtml]);
+    console.log(valueHtml);
 
     return (
         <>
