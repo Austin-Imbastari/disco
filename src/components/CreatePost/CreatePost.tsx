@@ -3,37 +3,36 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-type UserInput = {
-    text: string;
-    title: string;
-};
-
 const CreatePost = () => {
     const [isTitle, setTitle] = useState<string>("");
-    const [valueHtml, setValueHtml] = useState<UserInput>({
-        text: "",
-        title: "",
-    });
+    const [valueHtml, setValueHtml] = useState<string>("");
 
     const handleEditorChange = (value: string) => {
-        setValueHtml({
-            ...valueHtml,
-            title: isTitle,
-            text: value,
-        });
+        setValueHtml(value);
     };
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
         setTitle(value);
-        setValueHtml({
-            ...valueHtml,
-            title: value,
-            text: valueHtml.text,
+    };
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const objToSubmit = {
+            subject: isTitle,
+            content: valueHtml,
+        };
+        console.log(objToSubmit);
+
+        // fetch post
+        await fetch("http://localhost:3001/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(objToSubmit),
         });
     };
 
-    console.log(valueHtml);
     return (
         <>
             <div className='mt-20'></div>
@@ -53,14 +52,14 @@ const CreatePost = () => {
                 <div>
                     <ReactQuill
                         onChange={handleEditorChange}
-                        value={valueHtml.text}
+                        value={valueHtml}
                         formats={formats}
                         modules={modules}
                         theme='snow'
                     />
                 </div>
                 <div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className='container mt-1 mx-auto px-8 relative h-16'>
                             <div className='absolute bottom-0 right-0 '>
                                 <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
