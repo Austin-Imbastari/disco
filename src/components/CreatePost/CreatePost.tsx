@@ -20,6 +20,7 @@ const CreatePost = () => {
 
         if (isTitle.length <= 0 && valueHtml.length <= 0) {
             alert("You must enter a post!");
+            return;
         }
         const objToSubmit = {
             subject: isTitle,
