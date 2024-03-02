@@ -3,3 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* styling for the rich editor (Quill) */
+.ql-editor {
+    min-height: 400px;
+    font-size: 18px;
+}
