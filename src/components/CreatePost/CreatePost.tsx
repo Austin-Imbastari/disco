@@ -59,6 +59,17 @@ const CreatePost = () => {
                         theme='snow'
                     />
                 </div>
+                <div>
+                    <form>
+                        <div className='container mt-1 mx-auto px-8 relative h-16'>
+                            <div className='absolute bottom-0 right-0 '>
+                                <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
+                                    Submit Post
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </>
     );
