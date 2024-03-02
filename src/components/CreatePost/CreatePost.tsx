@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
 const CreatePost = () => {
+    const [valueHtml, setValueHtml] = useState<string>("");
+
+    const handleEditorChange = (value: string) => {
+        setValueHtml(value);
+        console.log(valueHtml);
+    };
+
     return (
         <>
             <div className='mt-20'></div>
@@ -17,7 +25,13 @@ const CreatePost = () => {
                     ></textarea>
                 </div>
                 <div>
-                    <ReactQuill formats={formats} modules={modules} theme='snow' />
+                    <ReactQuill
+                        onChange={handleEditorChange}
+                        value={valueHtml}
+                        formats={formats}
+                        modules={modules}
+                        theme='snow'
+                    />
                 </div>
             </div>
         </>
