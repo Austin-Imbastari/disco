@@ -6,6 +6,7 @@ import AboutUs from "../components/AboutUs/AboutUs";
 import SignIn from "../components/SignIn/SignIn";
 import Board from "../components/Board/Board";
 import CreatePost from "../components/CreatePost/CreatePost";
+import PostPage from "../components/PostPage/PostPage";
 
 const Home = () => {
     return (
@@ -19,6 +20,7 @@ const Home = () => {
                 <Route path='/aboutus' element={<AboutUs />} />
                 <Route path='/signin' element={<SignIn />} />
                 <Route path='/createpost' element={<CreatePost />} />
+                <Route path='/post/:id' element={<PostPage />} />
             </Routes>
         </>
     );

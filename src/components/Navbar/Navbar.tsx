@@ -23,13 +23,13 @@ const Navbar = () => {
                 </div>
                 <div>
                     <NavLink to='/signin'>
-                        <button className='bg-mint text-black px-5 py-2 rounded-md border-solid border-2 border-black hover:bg-azure tracking-wide transition-colors duration-200'>
+                        <button className='bg-mint text-black px-5 py-2 rounded-md border-solid border-2  hover:bg-azure tracking-wide transition-colors duration-200'>
                             Sign In
                         </button>
                     </NavLink>
                 </div>
             </nav>
-            <div style={{ borderBottom: "2px solid #E9F7E6", marginTop: "20px" }}></div>
+            <div style={{ borderBottom: "2.5px solid #E9F7E6", marginTop: "20px" }}></div>
         </>
     );
 };

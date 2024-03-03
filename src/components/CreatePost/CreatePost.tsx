@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const CreatePost = () => {
+    const navigate = useNavigate();
     const [isTitle, setTitle] = useState<string>("");
     const [valueHtml, setValueHtml] = useState<string>("");
 
@@ -22,27 +24,36 @@ const CreatePost = () => {
             alert("You must enter a post!");
             return;
         }
+
         const objToSubmit = {
             subject: isTitle,
-            content: valueHtml,
+            text: valueHtml,
+            boardId: 1,
+            userId: 1,
         };
+
         console.log(objToSubmit);
 
         // fetch post
-        await fetch("http://localhost:3001/posts", {
+        const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(objToSubmit),
         });
+
+        const data = await response.json();
+        const postId = data.id;
+        navigate(`/post/${postId}`);
+        console.log(data);
     };
 
     return (
         <>
             <div className='mt-20'></div>
             <div
-                style={{ border: "2px solid #E8F2FE", borderRadius: "10px", marginTop: "10px" }}
+                style={{ border: "2.5px solid #E8F2FE", borderRadius: "10px", marginTop: "10px" }}
                 className='container mx-auto px-8 py-8'
             >
                 <div className=''>
