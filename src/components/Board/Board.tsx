@@ -11,14 +11,18 @@ type PostData = {
 
 const Board = () => {
     const [items, setItems] = useState<PostData>();
-    const [userId, setUserId] = useState<number>();
+    // const [userId, setUserId] = useState<number>();
 
     const handleFetchItems = async () => {
-        const url = "https://disco-app-7sxty.ondigitalocean.app/boards/1/posts";
-        const res = await fetch(url);
-        const data = await res.json();
-        setItems(data);
-        console.log(data);
+        try {
+            const url = "https://disco-app-7sxty.ondigitalocean.app/boards/1/posts";
+            const res = await fetch(url);
+            const data = await res.json();
+            setItems(data);
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -35,8 +39,8 @@ const Board = () => {
 
     return (
         <>
-            <div className='container mt-10 mx-auto px-8 relative h-16'>
-                <div className='absolute bottom-0 right-0 '>
+            <div className='container mt-10 mx-auto px-8 relative h-16 '>
+                <div className='absolute bottom-0 right-0'>
                     <Link to='/createpost'>
                         <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
                             Create Post
@@ -69,23 +73,3 @@ const Board = () => {
 };
 
 export default Board;
-
-// CSS Helper
-// style={{ border: "2px solid red" }}
-
-// Dynamic create post
-
-// import React from "react";
-// const PostGrid = ({ posts }) => {
-//   return (
-//     <div className="grid grid-cols-3 gap-4">
-//       {posts.map((post, index) => (
-//         <div key={index} className="bg-gray-200 p-4">
-//           {post.title}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default PostGrid;

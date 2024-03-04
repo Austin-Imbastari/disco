@@ -43,10 +43,14 @@ const CreatePost = () => {
             body: JSON.stringify(objToSubmit),
         });
 
-        const data = await response.json();
-        const postId = data.id;
-        navigate(`/post/${postId}`);
-        console.log(data);
+        try {
+            const data = await response.json();
+            const postId = data.id;
+            navigate(`/post/${postId}`);
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (

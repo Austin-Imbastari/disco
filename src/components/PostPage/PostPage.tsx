@@ -13,10 +13,14 @@ const PostPage = () => {
     const { id } = useParams();
 
     const handleFetchPageId = async (id: string | undefined) => {
-        const url = `https://disco-app-7sxty.ondigitalocean.app/posts/${id}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        setPostDetail([data]);
+        try {
+            const url = `https://disco-app-7sxty.ondigitalocean.app/posts/${id}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            setPostDetail([data]);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
