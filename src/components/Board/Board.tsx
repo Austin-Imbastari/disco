@@ -11,7 +11,7 @@ type PostData = {
 
 const Board = () => {
     const [items, setItems] = useState<PostData>();
-    const [userId, setUserId] = useState();
+    const [userId, setUserId] = useState<number>();
 
     const handleFetchItems = async () => {
         const url = "https://disco-app-7sxty.ondigitalocean.app/boards/1/posts";
@@ -54,7 +54,7 @@ const Board = () => {
             >
                 {items?.map((item) => (
                     <div key={item.id}>
-                        <Link to={""}>
+                        <Link to={"/post/" + item.id}>
                             <BoardPostItem
                                 author='Future Hendrix'
                                 subject={item.subject}
