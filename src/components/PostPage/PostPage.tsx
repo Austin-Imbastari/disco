@@ -49,7 +49,7 @@ const PostPage = () => {
                             <h4>{dateFormatter(post.createdAt)}</h4>
 
                             <div className='mt-5'>
-                                <p className='leading-8 '>{post.text}</p>
+                                <p className='leading-8 ' dangerouslySetInnerHTML={{ __html: post.text }} />
                             </div>
                         </div>
                     ))}
