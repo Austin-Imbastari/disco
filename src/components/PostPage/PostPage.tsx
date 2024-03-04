@@ -2,6 +2,8 @@ import React from "react";
 
 const PostPage = () => {
     /// Fetch the post
+    // use the useParams hook from react router postID
+    // this way we can dynamically render from specific post
     return (
         <>
             <div className='mt-20'></div>
