@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Comment from "../Comment/Comment";
 import { useParams } from "react-router-dom";
+import Comments from "../../model";
 
 type PostDetail = {
     id: number;
@@ -39,6 +41,24 @@ const PostPage = () => {
         return formattedDate;
     };
 
+    //HANDLES THE COMMENT
+    const [comment, setComment] = useState<string>("");
+    const [postComment, setPostComment] = useState<Comments[]>([]);
+    const handleAddTodo = () => {
+        if (comment) {
+            setPostComment([
+                ...postComment,
+                {
+                    userId: 0,
+                    postId: id || "",
+                    text: comment,
+                },
+            ]);
+            setComment("");
+        }
+    };
+    console.log(postComment);
+
     return (
         <>
             <div className='mt-20'></div>
@@ -57,27 +77,15 @@ const PostPage = () => {
                             </div>
                         </div>
                     ))}
-
-                    <div className='mt-10 flex justify-center'>
-                        <div className='w-1/2 flex flex-col justify-center items-center'>
-                            <textarea
-                                style={{ resize: "none", outline: "none" }}
-                                className='block mb-4 p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border h-40'
-                                placeholder='Add a comment here... '
-                            ></textarea>
-                            <form>
-                                <div className='container mt-1 mx-auto px-8  h-16'>
-                                    <div className=' '>
-                                        <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
-                                            Comment
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <Comment
+                comment={comment}
+                setComment={setComment}
+                postComment={postComment}
+                setPostComment={setPostComment}
+                handleAddTodo={handleAddTodo}
+            />
         </>
     );
 };
