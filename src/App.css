@@ -40,3 +40,29 @@ button:hover {
 button:active {
     box-shadow: none;
 }
+
+.rainbow-text {
+    font-weight: 700;
+    animation: rainbow 5.5s ease-in-out;
+    animation-iteration-count: infinite;
+}
+@keyframes rainbow {
+    100%,
+    0% {
+        color: rgb(127, 0, 255);
+    }
+
+    50% {
+        color: rgb(255, 0, 255);
+    }
+
+    75% {
+        color: rgb(127, 0, 255);
+    }
+    81% {
+        color: rgb(255, 0, 127);
+    }
+    100% {
+        color: rgb(242, 0, 255);
+    }
+}
