@@ -19,19 +19,18 @@ const AboutUs = () => {
                         <div>
                             <p className='tracking-wider text-center'>
                                 {" "}
-                                Step into our vibrant blog site, where every click unveils captivating stories and
-                                delightful discoveries. From heartwarming travel tales to tantalizing recipes, our
+                                Step into our vibrant blog site, where every click unveils captivating developer tips
+                                and delightful discoveries. From heartwarming travel tales to tantalizing recipes, our
                                 eclectic mix of content sparks joy and ignites imagination.
                             </p>
                             <br></br>
                             <p className='tracking-wider text-center rainbow-text'>
-                                Dive into our virtual library of articles curated to ignite your passions. Whether
-                                you're an adventurer, a chef, or a wellness enthusiast, there's something for everyone
-                                to uncover and enjoy.
+                                Ignite your passions. Whether you're a software developer, a chef, or a wellness
+                                enthusiast, there's something for everyone to uncover and enjoy.
                             </p>
                             <br></br>
                             <p className='tracking-wider text-center'>
-                                Engage with like-minded individuals in our welcoming space. Share travel tips, swap
+                                Engage with like-minded individuals in our welcoming space. Share dev tips, swap
                                 recipes, or offer words of encouragement as we celebrate the beauty of diversity and
                                 shared passions.
                             </p>
@@ -46,7 +45,7 @@ const AboutUs = () => {
                             <div>
                                 <a href='https://github.com/jpnws' target='_blank'>
                                     <img className='rounded-full scale-75' src={Jiggy} alt='Jiggy' />
-                                    <h4 className='text-center text-2xl font-medium'>Jiggy</h4>
+                                    <h4 className='text-center text-2xl font-medium'>Ji</h4>
                                     <p className='text-center mt-2 tracking-wider font-light	'>Software Developer</p>
                                 </a>
                             </div>
@@ -60,11 +59,11 @@ const AboutUs = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div>
-                    <div className='mt-20'>
+                <div>
+                    <div className='mt-20 mb-10'>
                         <img src={ComputerSvg} alt='computer-svg' />
                     </div>
-                </div> */}
+                </div>
             </div>
         </>
     );
