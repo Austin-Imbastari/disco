@@ -18,7 +18,7 @@ const PostPage = () => {
 
     const handleFetchPageId = async (id: string | undefined) => {
         try {
-            const url = `https://disco-app-7sxty.ondigitalocean.app/posts/${id}`;
+            const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${id}`;
             const res = await fetch(url);
             const data = await res.json();
             setPostDetail([data]);
