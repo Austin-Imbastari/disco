@@ -3,7 +3,6 @@ import Comments from "../../model";
 
 type PostComment = {
     postComment: Comments[];
-    createdAt: number;
 };
 const CommentList = ({ postComment }: PostComment) => {
     return (

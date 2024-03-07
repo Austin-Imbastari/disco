@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Comment from "../Comment/Comment";
 import { useParams } from "react-router-dom";
+import Comment from "../Comment/Comment";
+import CommentList from "../CommentList/CommentList";
 import Comments from "../../model";
 
 type PostDetail = {
@@ -82,10 +83,10 @@ const PostPage = () => {
             <Comment
                 comment={comment}
                 setComment={setComment}
-                postComment={postComment}
                 setPostComment={setPostComment}
                 handleAddTodo={handleAddTodo}
             />
+            <CommentList postComment={postComment} />
         </>
     );
 };

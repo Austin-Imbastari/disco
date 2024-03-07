@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import CommentList from "../CommentList/CommentList";
 import Comments from "../../model";
 
 type CommentProps = {
     comment: string;
     setComment: React.Dispatch<React.SetStateAction<string>>;
     handleAddTodo: () => void;
-    postComment: Comments[];
     setPostComment: React.Dispatch<React.SetStateAction<Comments[]>>;
 };
 
-const Comment = ({ comment, setComment, handleAddTodo, postComment }: CommentProps) => {
-    const { id } = useParams<{ id: string }>();
+const Comment = ({ comment, setComment, handleAddTodo }: CommentProps) => {
+    // const { id } = useParams<{ id: string }>();
 
     const onChangeHandler = (e: React.FormEvent<HTMLTextAreaElement>): void => {
         setComment(e.currentTarget.value);
@@ -44,7 +42,6 @@ const Comment = ({ comment, setComment, handleAddTodo, postComment }: CommentPro
                             </div>
                         </div>
                     </form>
-                    <CommentList postComment={postComment} />
                 </div>
             </div>
         </>
