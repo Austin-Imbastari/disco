@@ -1,94 +1,99 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Comment from "../Comment/Comment";
-import CommentList from "../CommentList/CommentList";
-import Comments from "../../model";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Comment from '../Comment/Comment';
+import CommentList from '../CommentList/CommentList';
+import Comments from '../../model';
 
 type PostDetail = {
-    id: number;
-    createdAt: string;
-    subject: string;
-    text: string;
+  id: number;
+  createdAt: string;
+  subject: string;
+  text: string;
 }[];
 
 const PostPage = () => {
-    const [postDetail, setPostDetail] = useState<PostDetail>();
-    const { id } = useParams();
+  const [postDetail, setPostDetail] = useState<PostDetail>();
+  const { id } = useParams();
 
-    const handleFetchPageId = async (id: string | undefined) => {
-        try {
-            const url = `https://disco-app-7sxty.ondigitalocean.app/posts/${id}`;
-            const res = await fetch(url);
-            const data = await res.json();
-            setPostDetail([data]);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+  const handleFetchPageId = async (id: string | undefined) => {
+    try {
+      const url = `https://disco-app-7sxty.ondigitalocean.app/posts/${id}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      setPostDetail([data]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    useEffect(() => {
-        handleFetchPageId(id);
-    }, [id]);
+  useEffect(() => {
+    handleFetchPageId(id);
+  }, [id]);
 
-    const dateFormatter = (date: string) => {
-        const dateString = date;
-        const newDate = new Date(dateString);
-        newDate.setFullYear(2024, 3 - 1, 15);
-        const formattedDate = newDate.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-        });
-        return formattedDate;
-    };
+  const dateFormatter = (date: string) => {
+    const dateString = date;
+    const newDate = new Date(dateString);
+    newDate.setFullYear(2024, 3 - 1, 15);
+    const formattedDate = newDate.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    return formattedDate;
+  };
 
-    //HANDLES THE COMMENT
-    const [comment, setComment] = useState<string>("");
-    const [postComment, setPostComment] = useState<Comments[]>([]);
-    const handleAddTodo = () => {
-        if (comment) {
-            setPostComment([
-                ...postComment,
-                {
-                    userId: 0,
-                    postId: id || "",
-                    text: comment,
-                },
-            ]);
-            setComment("");
-        }
-    };
-    console.log(postComment);
+  //HANDLES THE COMMENT
+  const [postComment, setPostComment] = useState<Comments[]>([]);
 
-    return (
-        <>
-            <div className='mt-20'></div>
-            <div
-                style={{ border: "2px solid #E8F2FE", borderRadius: "10px", marginTop: "10px" }}
-                className='container mx-auto px-8 py-8'
-            >
-                <div>
-                    {postDetail?.map((post) => (
-                        <div key={post.id}>
-                            <h1 className='mb-1 font-bold text-xl'>{post.subject}</h1>
-                            <h4>{dateFormatter(post.createdAt)}</h4>
+  const handleAddTodo = (
+    e: React.FormEvent<HTMLFormElement>,
+    comment: string
+  ) => {
+    e.preventDefault();
+    if (comment) {
+      setPostComment([
+        ...postComment,
+        {
+          userId: 0,
+          postId: id || '',
+          text: comment,
+        },
+      ]);
+    }
+  };
+  console.log(postComment);
 
-                            <div className='mt-5'>
-                                <p className='leading-8 ' dangerouslySetInnerHTML={{ __html: post.text }} />
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  return (
+    <>
+      <div className="mt-20"></div>
+      <div
+        style={{
+          border: '2px solid #E8F2FE',
+          borderRadius: '10px',
+          marginTop: '10px',
+        }}
+        className="container mx-auto px-8 py-8"
+      >
+        <div>
+          {postDetail?.map((post) => (
+            <div key={post.id}>
+              <h1 className="mb-1 font-bold text-xl">{post.subject}</h1>
+              <h4>{dateFormatter(post.createdAt)}</h4>
+
+              <div className="mt-5">
+                <p
+                  className="leading-8 "
+                  dangerouslySetInnerHTML={{ __html: post.text }}
+                />
+              </div>
             </div>
-            <Comment
-                comment={comment}
-                setComment={setComment}
-                setPostComment={setPostComment}
-                handleAddTodo={handleAddTodo}
-            />
-            <CommentList postComment={postComment} />
-        </>
-    );
+          ))}
+        </div>
+      </div>
+      <Comment handleAddTodo={handleAddTodo} />
+      <CommentList postComment={postComment} />
+    </>
+  );
 };
 
 export default PostPage;
