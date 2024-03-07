@@ -1,10 +1,13 @@
 import React from "react";
 import Comments from "../../model";
+import { MdDelete } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 
 type PostComment = {
     postComment: Comments[];
+    handleDeleteComment: (id: string) => void;
 };
-const CommentList = ({ postComment }: PostComment) => {
+const CommentList = ({ postComment, handleDeleteComment }: PostComment) => {
     return (
         <>
             {postComment.map((comment) => (
@@ -25,6 +28,14 @@ const CommentList = ({ postComment }: PostComment) => {
                                 </div>
                             </div>
                             <p className='-mt-4 text-gray-500'>{comment.text}</p>
+                            <div className='flex flex-row-reverse'>
+                                <div onClick={() => handleDeleteComment(comment.postId)} className='ml-2'>
+                                    <MdDelete />
+                                </div>
+                                <div>
+                                    <MdEdit />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
