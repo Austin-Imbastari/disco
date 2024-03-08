@@ -1,8 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+    const [user, setUser] = useState<string>("");
+
+    // const fetchUsers = async () => {
+    //     try {
+    //         const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/users/current");
+    //         const data = await response.json();
+    //         setUser(data);
+    //         console.log(data);
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
+
+    // console.log(user);
+
+    // useEffect(() => {
+    //     fetchUsers();
+    // }, []);
+
     return (
         <>
             <nav className='flex justify-between items-center w-[92%] mx-auto mt-5'>
@@ -22,9 +41,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div>
-                    <NavLink to='/signin'>
+                    <NavLink to='/signup'>
                         <button className='bg-mint text-black px-5 py-2 rounded-md border-solid border-2  hover:bg-azure tracking-wide transition-colors duration-200'>
-                            Sign In
+                            Sign Up
                         </button>
                     </NavLink>
                 </div>

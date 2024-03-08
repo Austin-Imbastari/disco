@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const SignUp = () => {
     const navigate = useNavigate();
-    const [credentials, setCredentials] = useState({
+    const [credentials, setCredentials] = useState<{ username: string; password: string }>({
         username: "",
         password: "",
     });
@@ -41,14 +41,23 @@ const SignIn = () => {
                 throw new Error("Failed to sign in");
             }
 
-            const data = await response.json();
-            navigate("/*");
-            console.log("Sign in successful:", data);
+            const { data } = await response.json();
+
+            console.log("Sign up successful:", data);
+
+            const token = data.token;
+            console.log("this is token:", token);
+            if (!token) {
+                throw new Error("Token not found in response data");
+            }
+
+            document.cookie = `auth=${token}; path=/; domain=disco-app-7sxty.ondigitalocean.app;`;
 
             setCredentials({
                 username: "",
                 password: "",
             });
+            navigate("/*");
         } catch (error) {
             console.error("Error signing in:", error);
         }
@@ -59,7 +68,7 @@ const SignIn = () => {
             <form onSubmit={handleOnSubmit}>
                 <div className='bg-[#F9FAFB] h-screen w-screen flex items-center'>
                     <div className='h-max mx-auto flex flex-col items-center'>
-                        <h1 className='text-xl font-bold text-center pb-10'>Sign in to your account</h1>
+                        <h1 className='text-xl font-bold text-center pb-10'>Sign Up</h1>
                         <div className='bg-white shadow-xl p-10 flex flex-col gap-4 text-sm'>
                             <div>
                                 <label className='text-gray-600 font-bold inline-block pb-2' htmlFor='username'>
@@ -85,6 +94,7 @@ const SignIn = () => {
                                     value={credentials.password}
                                     onChange={handlePasswordChange}
                                     placeholder='******'
+                                    autoComplete='on'
                                 />
                             </div>
                             <div className='flex'>
@@ -126,4 +136,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default SignUp;
