@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import AboutUs from "../components/AboutUs/AboutUs";
 import SignUp from "../components/SignUp/SignUp";
+import LogOut from "../components/LogOut/LogOut";
 import Board from "../components/Board/Board";
 import CreatePost from "../components/CreatePost/CreatePost";
 import PostPage from "../components/PostPage/PostPage";
@@ -19,6 +20,7 @@ const Home = () => {
                 <Route path='*' element={<Board />} />
                 <Route path='/aboutus' element={<AboutUs />} />
                 <Route path='/signup' element={<SignUp />} />
+                <Route path='/logout' element={<LogOut />} />
                 <Route path='/createpost' element={<CreatePost />} />
                 <Route path='/post/:id' element={<PostPage />} />
             </Routes>
