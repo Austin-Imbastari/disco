@@ -7,7 +7,7 @@ import Comment from "../Comment/Comment";
 import CommentList from "../CommentList/CommentList";
 import Comments from "../../model";
 
-type PostDetail = {
+export type PostDetail = {
     id: number;
     createdAt: string;
     subject: string;
@@ -18,7 +18,7 @@ const PostPage = () => {
     const value = useContext(UserContext);
     const [postDetail, setPostDetail] = useState<PostDetail>();
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
     const handleFetchPageId = async (id: string | undefined) => {
         try {
@@ -36,7 +36,7 @@ const PostPage = () => {
         handleFetchPageId(id);
     }, [id]);
 
-    console.log("Post Detials", postDetail);
+    // console.log("Post Detials", postDetail);
 
     const dateFormatter = (date: string) => {
         const dateString = date;
@@ -55,6 +55,7 @@ const PostPage = () => {
 
     const handleComment = (e: React.FormEvent<HTMLFormElement>, comment: string) => {
         e.preventDefault();
+
         if (comment) {
             setPostComment([
                 ...postComment,
@@ -66,8 +67,9 @@ const PostPage = () => {
             ]);
         }
     };
-    console.log("post commetn", postComment);
-    console.log("value", value);
+
+    // console.log("post commetn", postComment);
+    // console.log("value", value);
 
     const handleDeleteComment = (id: string) => {
         setPostComment(postComment.filter((comment) => comment.postId !== id));
@@ -97,7 +99,7 @@ const PostPage = () => {
                     ))}
                 </div>
             </div>
-            <Comment handleComment={handleComment} />
+            <Comment postDetail={postDetail} handleComment={handleComment} />
             <CommentList handleDeleteComment={handleDeleteComment} postComment={postComment} />
         </>
     );

@@ -28,7 +28,6 @@ export const UserProvider = (props: UserProviderProps) => {
                 const { data: currentUserData } = await currentUserGetResponse.json();
                 const currentUser = currentUserData.user;
                 setUser(currentUser);
-                console.log("user", currentUser);
             } catch (error) {
                 console.error("Error:", error);
             }

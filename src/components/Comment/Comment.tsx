@@ -1,12 +1,38 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { PostDetail } from "../PostPage/PostPage";
+import { UserContext } from "../../context/UserContext";
 
 type CommentProps = {
     handleComment: (e: React.FormEvent<HTMLFormElement>, comment: string) => void;
+    postDetail: PostDetail | undefined;
 };
 
-const Comment = ({ handleComment }: CommentProps) => {
+const Comment = ({ handleComment, postDetail }: CommentProps) => {
     const [comment, setComment] = useState("");
+    const value = useContext(UserContext);
+
+    const submitComment = async () => {
+        const newComment = {
+            text: comment,
+            postId: postDetail[0].id,
+            authorId: value?.id ?? 0,
+        };
+        console.log(comment);
+
+        const url = "https://disco-app-7sxty.ondigitalocean.app/api/comments";
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("auth")}`,
+            },
+            body: JSON.stringify(newComment),
+        });
+        const data = await response.json();
+
+        console.log(data);
+    };
 
     const onChangeHandler = (e: React.FormEvent<HTMLTextAreaElement>): void => {
         setComment(e.currentTarget.value);
@@ -26,6 +52,7 @@ const Comment = ({ handleComment }: CommentProps) => {
                     <form
                         onSubmit={(e) => {
                             handleComment(e, comment);
+                            submitComment();
                             setComment("");
                         }}
                     >
