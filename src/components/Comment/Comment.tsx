@@ -13,6 +13,7 @@ const Comment = ({ handleComment, postDetail }: CommentProps) => {
     const value = useContext(UserContext);
 
     const submitComment = async () => {
+        if (!postDetail) return;
         const newComment = {
             text: comment,
             postId: postDetail[0].id,
