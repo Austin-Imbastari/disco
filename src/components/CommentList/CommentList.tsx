@@ -11,7 +11,7 @@ const CommentList = ({ postComment, handleDeleteComment }: PostComment) => {
     return (
         <>
             {postComment.map((comment) => (
-                <div key={comment.userId}>
+                <div key={comment.text}>
                     <div className='mt-10 flex justify-center'>
                         <div className='relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg'>
                             <div className='relative flex gap-4'>

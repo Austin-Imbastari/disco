@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+//state management
+import { UserContext } from "../../context/UserContext";
 //components
 import Comment from "../Comment/Comment";
 import CommentList from "../CommentList/CommentList";
@@ -13,6 +15,7 @@ type PostDetail = {
 }[];
 
 const PostPage = () => {
+    const value = useContext(UserContext);
     const [postDetail, setPostDetail] = useState<PostDetail>();
     const { id } = useParams();
     console.log(id);
@@ -56,14 +59,15 @@ const PostPage = () => {
             setPostComment([
                 ...postComment,
                 {
-                    userId: 0,
+                    userId: value?.id ?? 0, // Provide a default value for userId
                     postId: id || "",
                     text: comment,
                 },
             ]);
         }
     };
-    console.log(postComment);
+    console.log("post commetn", postComment);
+    console.log("value", value);
 
     const handleDeleteComment = (id: string) => {
         setPostComment(postComment.filter((comment) => comment.postId !== id));
