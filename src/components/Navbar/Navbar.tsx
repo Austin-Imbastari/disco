@@ -33,8 +33,8 @@ const Navbar = () => {
         }
     };
 
-    console.log(localStorage.getItem("auth"));
-    console.log("this is the data", user);
+    // console.log(localStorage.getItem("auth"));
+    // console.log("this is the data", user);
 
     useEffect(() => {
         fetchUsers();

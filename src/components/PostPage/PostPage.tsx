@@ -15,10 +15,11 @@ type PostDetail = {
 const PostPage = () => {
     const [postDetail, setPostDetail] = useState<PostDetail>();
     const { id } = useParams();
+    console.log(id);
 
     const handleFetchPageId = async (id: string | undefined) => {
         try {
-            const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${id}`;
+            const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/:${id}`;
             const res = await fetch(url);
             const data = await res.json();
             setPostDetail([data]);
@@ -30,6 +31,8 @@ const PostPage = () => {
     useEffect(() => {
         handleFetchPageId(id);
     }, [id]);
+
+    console.log("Post Detials", postDetail);
 
     const dateFormatter = (date: string) => {
         const dateString = date;

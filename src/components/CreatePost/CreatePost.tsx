@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -32,20 +32,23 @@ const CreatePost = () => {
             userId: 1,
         };
 
-        console.log(objToSubmit);
+        console.log("create post", objToSubmit);
 
         // fetch post
-        const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/posts", {
+        const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("auth")}`,
             },
             body: JSON.stringify(objToSubmit),
         });
 
         try {
             const data = await response.json();
+            console.log("this is the data", data);
             const postId = data.id;
+            console.log("post id", postId);
             navigate(`/post/${postId}`);
             console.log(data);
         } catch (err) {
@@ -60,7 +63,7 @@ const CreatePost = () => {
                 style={{ border: "2.5px solid #E8F2FE", borderRadius: "10px", marginTop: "10px" }}
                 className='container mx-auto px-8 py-8'
             >
-                <div className=''>
+                <div>
                     <h1 className='mb-2 font-bold text-xl'>Title</h1>
                     <textarea
                         onChange={handleTitleChange}
