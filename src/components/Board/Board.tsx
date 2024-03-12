@@ -4,9 +4,11 @@ import { BoardPostItem } from "./BoardPostItem";
 
 type PostData = {
     id: number;
-    author: string;
     subject: string;
     createdAt: string;
+    author: {
+        username: string;
+    };
 }[];
 
 const Board = () => {
@@ -15,11 +17,15 @@ const Board = () => {
 
     const handleFetchItems = async () => {
         try {
-            const url = "https://disco-app-7sxty.ondigitalocean.app/boards/1/posts";
-            const res = await fetch(url);
-            const data = await res.json();
-            setItems(data);
-            console.log(data);
+            const url = "https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts";
+            const res = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                },
+            });
+            const { data: data } = await res.json();
+            setItems(data.board.posts);
+            console.log(data.board);
         } catch (err) {
             console.log(err);
         }
@@ -60,7 +66,7 @@ const Board = () => {
                     <div key={item.id}>
                         <Link to={"/post/" + item.id}>
                             <BoardPostItem
-                                author='Future Hendrix'
+                                author={item.author.username}
                                 subject={item.subject}
                                 createdDate={dateFormatter(item.createdAt)}
                             />
