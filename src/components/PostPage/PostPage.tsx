@@ -7,7 +7,7 @@ import Comment from "../Comment/Comment";
 import CommentList from "../CommentList/CommentList";
 
 // Types
-import Comments from "../../model";
+import { Comments } from "../../model";
 
 export type PostDetail = {
     id: number;
@@ -65,8 +65,6 @@ const PostPage = () => {
             ]);
         }
     };
-
-    console.log(postComment);
 
     return (
         <>

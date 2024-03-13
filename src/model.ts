@@ -5,4 +5,11 @@ type Comments = {
     text: string;
 };
 
-export default Comments;
+type ExtendedComments = Comments & {
+    id: number;
+    author: {
+        username: string;
+    };
+};
+
+export type { Comments, ExtendedComments };
