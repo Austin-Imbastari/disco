@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BoardPostItem } from "./BoardPostItem";
@@ -76,6 +77,6 @@ const Board = () => {
             </div>
         </>
     );
-};
+
 
 export default Board;
