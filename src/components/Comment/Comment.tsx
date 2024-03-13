@@ -13,26 +13,32 @@ const Comment = ({ handleComment, postDetail }: CommentProps) => {
     const value = useContext(UserContext);
 
     const submitComment = async () => {
-        if (!postDetail) return;
+        if (!postDetail || !comment) return;
         const newComment = {
             text: comment,
             postId: postDetail[0].id,
             authorId: value?.id ?? 0,
         };
-        console.log(comment);
 
-        const url = "https://disco-app-7sxty.ondigitalocean.app/api/comments";
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("auth")}`,
-            },
-            body: JSON.stringify(newComment),
-        });
-        const data = await response.json();
-
-        console.log(data);
+        try {
+            const url = "https://disco-app-7sxty.ondigitalocean.app/api/comments";
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                },
+                body: JSON.stringify(newComment),
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Comment submitted successfully:", data);
+            } else {
+                console.error("Failed to submit comment:", response.statusText);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const onChangeHandler = (e: React.FormEvent<HTMLTextAreaElement>): void => {
