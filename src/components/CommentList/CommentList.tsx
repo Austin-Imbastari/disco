@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Comments from "../../model";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
+//state management
+import { UserContext } from "../../context/UserContext";
+
 type PostComment = {
     postComment: Comments[];
-    handleDeleteComment: (id: string) => void;
+    setPostComment: React.Dispatch<React.SetStateAction<Comments[]>>;
+    id: string | undefined;
 };
-const CommentList = ({ postComment, handleDeleteComment }: PostComment) => {
+
+const CommentList = ({ id, setPostComment, postComment }: PostComment) => {
+    const value = useContext(UserContext);
+
+    const fetchComments = async () => {
+        const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${id}/comments`;
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("auth")}`,
+            },
+        });
+
+        const {
+            data: { post },
+        } = await response.json();
+        setPostComment(post.comments);
+    };
+
+    useEffect(() => {
+        fetchComments();
+    }, []);
+
+    const handleDeleteComment = (id: string) => {
+        setPostComment(postComment.filter((comment) => comment.postId !== id));
+    };
+
     return (
         <>
             {postComment.map((comment) => (
@@ -45,3 +74,6 @@ const CommentList = ({ postComment, handleDeleteComment }: PostComment) => {
 };
 
 export default CommentList;
+
+/// update the state
+//

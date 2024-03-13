@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-//state management
 import { UserContext } from "../../context/UserContext";
+
 //components
 import Comment from "../Comment/Comment";
 import CommentList from "../CommentList/CommentList";
+
+// Types
 import Comments from "../../model";
 
 export type PostDetail = {
@@ -15,10 +17,10 @@ export type PostDetail = {
 }[];
 
 const PostPage = () => {
-    const value = useContext(UserContext);
     const [postDetail, setPostDetail] = useState<PostDetail>();
+    const [postComment, setPostComment] = useState<Comments[]>([]);
+    const value = useContext(UserContext);
     const { id } = useParams();
-    // console.log(id);
 
     const handleFetchPageId = async (id: string | undefined) => {
         try {
@@ -36,8 +38,6 @@ const PostPage = () => {
         handleFetchPageId(id);
     }, [id]);
 
-    // console.log("Post Detials", postDetail);
-
     const dateFormatter = (date: string) => {
         const dateString = date;
         const newDate = new Date(dateString);
@@ -51,8 +51,6 @@ const PostPage = () => {
     };
 
     //HANDLES THE COMMENT
-    const [postComment, setPostComment] = useState<Comments[]>([]);
-
     const handleComment = (e: React.FormEvent<HTMLFormElement>, comment: string) => {
         e.preventDefault();
 
@@ -66,13 +64,6 @@ const PostPage = () => {
                 },
             ]);
         }
-    };
-
-    // console.log("post commetn", postComment);
-    // console.log("value", value);
-
-    const handleDeleteComment = (id: string) => {
-        setPostComment(postComment.filter((comment) => comment.postId !== id));
     };
 
     return (
@@ -100,7 +91,7 @@ const PostPage = () => {
                 </div>
             </div>
             <Comment postDetail={postDetail} handleComment={handleComment} />
-            <CommentList handleDeleteComment={handleDeleteComment} postComment={postComment} />
+            <CommentList id={id} setPostComment={setPostComment} postComment={postComment} />
         </>
     );
 };
