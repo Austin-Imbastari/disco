@@ -66,6 +66,8 @@ const PostPage = () => {
         }
     };
 
+    console.log(postComment);
+
     return (
         <>
             <div className='mt-20'></div>

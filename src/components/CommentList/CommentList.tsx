@@ -33,8 +33,8 @@ const CommentList = ({ id, setPostComment, postComment }: PostComment) => {
         fetchComments();
     }, []);
 
-    const handleDeleteComment = (id: string) => {
-        setPostComment(postComment.filter((comment) => comment.postId !== id));
+    const handleDeleteComment = () => {
+        setPostComment(postComment.filter((comment) => comment.userId !== value?.id));
     };
 
     return (
