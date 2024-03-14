@@ -1,68 +1,68 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* styling for the rich editor (Quill) */
 .ql-editor {
-    min-height: 400px;
-    font-size: 18px;
+  min-height: 400px;
+  font-size: 18px;
 }
 
 button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    color: #7e97b8;
-    background-color: #e0e8ef;
-    border-style: solid;
-    border-width: 2px 2px 2px 2px;
-    border-color: rgba(255, 255, 255, 0.333);
-    border-radius: 40px 40px 40px 40px;
-    padding: 16px 24px 16px 28px;
-    transform: translate(0px, 0px) rotate(0deg);
-    transition: 0.2s;
-    box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px #e8f2fe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transform: translate(0px, 0px) rotate(0deg);
+  transition: 0.2s;
+  box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px #e8f2fe;
+  border-width: 2px 2px 2px 2px;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.333);
+  border-radius: 40px 40px 40px 40px;
+  background-color: #e0e8ef;
+  padding: 16px 24px 16px 28px;
+  color: #7e97b8;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: inherit;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 button:hover {
-    color: #516d91;
-    background-color: #e8f2fe;
-    box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px #e9f7e6;
+  box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px #e9f7e6;
+  background-color: #e8f2fe;
+  color: #516d91;
 }
 
 button:active {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .rainbow-text {
-    font-weight: 700;
-    animation: rainbow 5.5s ease-in-out;
-    animation-iteration-count: infinite;
+  animation: rainbow 5.5s ease-in-out;
+  animation-iteration-count: infinite;
+  font-weight: 700;
 }
 @keyframes rainbow {
-    100%,
-    0% {
-        color: rgb(127, 0, 255);
-    }
+  100%,
+  0% {
+    color: rgb(127, 0, 255);
+  }
 
-    50% {
-        color: rgb(255, 0, 255);
-    }
+  50% {
+    color: rgb(255, 0, 255);
+  }
 
-    75% {
-        color: rgb(127, 0, 255);
-    }
-    81% {
-        color: rgb(255, 0, 127);
-    }
-    100% {
-        color: rgb(242, 0, 255);
-    }
+  75% {
+    color: rgb(127, 0, 255);
+  }
+  81% {
+    color: rgb(255, 0, 127);
+  }
+  100% {
+    color: rgb(242, 0, 255);
+  }
 }
