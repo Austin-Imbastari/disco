@@ -8,7 +8,7 @@ const LogOut = () => {
     e.preventDefault();
 
     try {
-      const url = 'http://localhost:8000/api/auth/signout';
+      const url = 'https://disco-app-7sxty.ondigitalocean.app/api/auth/signout';
 
       const response = await fetch(url, {
         method: 'POST',

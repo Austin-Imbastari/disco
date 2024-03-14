@@ -11,7 +11,7 @@ const CommentList = ({
 }) => {
   const handleDeleteComment = async (commentId: number) => {
     try {
-      const url = `http://localhost:8000/api/comments/${commentId}`;
+      const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
       const response = await fetch(url, {
         method: 'DELETE',
         headers: {

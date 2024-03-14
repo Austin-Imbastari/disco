@@ -27,7 +27,7 @@ const CreatePost = () => {
       return;
     }
 
-    const productionUrl = 'http://localhost:8000';
+    const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
 
     const currentUserGetResponse = await fetch(
       `${productionUrl}/api/users/current`,
@@ -49,14 +49,17 @@ const CreatePost = () => {
       authorId: currentUser.id,
     };
 
-    const postCreateResponse = await fetch('http://localhost:8000/api/posts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('auth')}`,
-      },
-      body: JSON.stringify(newPost),
-    });
+    const postCreateResponse = await fetch(
+      'https://disco-app-7sxty.ondigitalocean.app/api/posts',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('auth')}`,
+        },
+        body: JSON.stringify(newPost),
+      }
+    );
 
     const { data: createdPostData } = await postCreateResponse.json();
     const post = createdPostData.post;

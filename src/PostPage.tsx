@@ -37,7 +37,7 @@ const PostPage = () => {
 
   const getComments = useCallback(async () => {
     try {
-      const url = `http://localhost:8000/api/posts/${postId}/comments`;
+      const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}/comments`;
       const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,
@@ -69,7 +69,7 @@ const PostPage = () => {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const url = `http://localhost:8000/api/posts/${postId}`;
+        const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}`;
         const res = await fetch(url);
         const { data: postData } = await res.json();
         const post = postData.post;

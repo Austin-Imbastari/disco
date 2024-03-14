@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const fetchUsers = async () => {
     try {
-      const productionUrl = 'http://localhost:8000';
+      const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
       const response = await fetch(`${productionUrl}/api/users/current`, {
         method: 'GET',
         headers: {

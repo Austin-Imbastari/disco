@@ -18,7 +18,7 @@ export const UserProvider = (props: UserProviderProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productionUrl = 'http://localhost:8000';
+        const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
         const currentUserGetResponse = await fetch(
           `${productionUrl}/api/users/current`,
           {

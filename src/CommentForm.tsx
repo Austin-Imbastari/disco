@@ -20,7 +20,7 @@ const CommentForm = ({
       authorId: currentUser?.id ?? 0,
     };
     try {
-      const url = 'http://localhost:8000/api/comments';
+      const url = 'https://disco-app-7sxty.ondigitalocean.app/api/comments';
       const response = await fetch(url, {
         method: 'POST',
         headers: {

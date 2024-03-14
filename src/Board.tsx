@@ -17,7 +17,8 @@ const Board = () => {
 
   const handleFetchItems = async () => {
     try {
-      const url = 'http://localhost:8000/api/boards/1/posts';
+      const url =
+        'https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts';
       const res = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,
