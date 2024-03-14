@@ -1,104 +1,128 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useContext, useEffect, useState } from "react";
-import { ExtendedComments, Comments } from "../../model";
-import { MdDelete } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+import { useCallback, useEffect } from 'react';
 
-//state management
-import { UserContext } from "../../context/UserContext";
+import { MdDelete } from 'react-icons/md';
+import { MdEdit } from 'react-icons/md';
+import { PostCommentType } from '../../model';
 
-type PostComment = {
-    postComment: ExtendedComments[];
-    setPostComment: React.Dispatch<React.SetStateAction<Comments[]>>;
-    id: string | undefined;
+type ResponseCommentType = {
+  id: number;
+  text: string;
+  author: {
+    id: number;
+    username: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 };
 
-const CommentList = ({ id, setPostComment, postComment }: PostComment) => {
-    const value = useContext(UserContext);
+type CommentListPropTypes = {
+  postComments: PostCommentType[] | undefined;
+  setPostComments: React.Dispatch<
+    React.SetStateAction<PostCommentType[] | undefined>
+  >;
+  postId: string | undefined;
+};
 
-    const fetchComments = async () => {
-        try {
-            const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${id}/comments`;
-            const response = await fetch(url, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
-                },
-            });
+const CommentList = ({
+  postId: postId,
+  setPostComments: setPostComments,
+  postComments: postComments,
+}: CommentListPropTypes) => {
+  const handleDeleteComment = async (commentId: number) => {
+    try {
+      const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('auth')}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Resource deleted successfully');
+      } else {
+        const errorData = data;
+        console.error('Error:', errorData);
+      }
+    } catch (err) {
+      console.log('error', err);
+    }
+  };
 
-            const {
-                data: { post },
-            } = await response.json();
-            setPostComment(post.comments);
-        } catch (error) {
-            console.log(error);
+  const fetchComments = useCallback(async () => {
+    try {
+      const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}/comments`;
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('auth')}`,
+        },
+      });
+      const {
+        data: { post: responsePost },
+      } = await response.json();
+      const postComments = responsePost.comments.map(
+        (responseComment: ResponseCommentType) => {
+          return {
+            commentId: responseComment.id,
+            author: responseComment.author.username,
+            text: responseComment.text,
+            createdAt: responseComment.createdAt,
+          } as PostCommentType;
         }
-    };
+      );
+      setPostComments(postComments);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [postId, setPostComments]);
 
-    const handleDeleteComment = async (id: number) => {
-        // console.log("commentId", id);
-        // console.log("userId", value?.id);
+  useEffect(() => {
+    fetchComments();
+  });
 
-        try {
-            const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${id}`;
-
-            const response = await fetch(url, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
-                    "Content-Type": "application/json",
-                },
-            });
-            const data = await response.json();
-            // setPostComment(postComment.filter((comment) => comment.userId !== value?.id));
-            if (response.ok) {
-                console.log("Resource deleted successfully");
-            } else {
-                const errorData = data;
-                console.error("Error:", errorData);
-            }
-        } catch (err) {
-            console.log("error", err);
-        }
-    };
-
-    useEffect(() => {
-        fetchComments();
-    }, [fetchComments]);
-
-    return (
-        <>
-            {postComment.map((comment) => (
-                <div key={comment.text}>
-                    <div className='mt-10 flex justify-center'>
-                        <div className='relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg'>
-                            <div className='relative flex gap-4'>
-                                <div className='flex flex-col w-full'>
-                                    <div className='flex flex-row justify-between'>
-                                        <p className='relative text-xl whitespace-nowrap truncate overflow-hidden'>
-                                            {comment.author?.username}
-                                        </p>
-                                        <a className='text-gray-500 text-xl' href='#'>
-                                            <i className='fa-solid fa-trash'></i>
-                                        </a>
-                                    </div>
-                                    <p className='text-gray-400 text-sm'>20 April 2022, at 14:88 PM</p>
-                                </div>
-                            </div>
-                            <p className='-mt-4 text-gray-500'>{comment.text}</p>
-                            <div className='flex flex-row-reverse'>
-                                <div onClick={() => handleDeleteComment(comment.id)} className='ml-2'>
-                                    <MdDelete />
-                                </div>
-                                <div>
-                                    <MdEdit />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  return (
+    <>
+      {postComments?.map((comment) => (
+        <div key={comment.commentId}>
+          <div className="mt-10 flex justify-center">
+            <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg">
+              <div className="relative flex gap-4">
+                <div className="flex flex-col w-full">
+                  <div className="flex flex-row justify-between">
+                    <p className="relative text-xl whitespace-nowrap truncate overflow-hidden">
+                      {comment.author}
+                    </p>
+                    <a
+                      className="text-gray-500 text-xl"
+                      href="#"
+                    >
+                      <i className="fa-solid fa-trash"></i>
+                    </a>
+                  </div>
+                  <p className="text-gray-400 text-sm">
+                    20 April 2022, at 14:88 PM
+                  </p>
                 </div>
-            ))}
-        </>
-    );
+              </div>
+              <p className="-mt-4 text-gray-500">{comment.text}</p>
+              <div className="flex flex-row-reverse">
+                <div
+                  onClick={() => handleDeleteComment(comment.commentId)}
+                  className="ml-2 hover:cursor-pointer"
+                >
+                  <MdDelete />
+                </div>
+                <div>
+                  <MdEdit />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default CommentList;

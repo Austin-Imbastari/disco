@@ -1,15 +1,6 @@
-// types & interfaces
-type Comments = {
-    userId: number;
-    postId: string;
-    text: string;
+export type PostCommentType = {
+  commentId: number;
+  author: string;
+  text: string;
+  createdAt: string;
 };
-
-type ExtendedComments = Comments & {
-    id: number;
-    author: {
-        username: string;
-    };
-};
-
-export type { Comments, ExtendedComments };
