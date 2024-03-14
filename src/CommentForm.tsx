@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { PostDetail } from '../PostPage/PostPage';
-import { UserContext } from '../../context/UserContext';
+import { UserContext } from './UserContext';
 
-type CommentProps = {
-  postDetail: PostDetail | undefined;
-};
-
-const Comment = ({ postDetail }: CommentProps) => {
+const CommentForm = ({
+  postId,
+  onCommentSubmitted,
+}: {
+  postId: number;
+  onCommentSubmitted: () => void;
+}) => {
   const [comment, setComment] = useState('');
-  const value = useContext(UserContext);
+  const currentUser = useContext(UserContext);
 
-  const submitComment = async () => {
-    if (!postDetail || !comment) return;
+  const submitComment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const newComment = {
       text: comment,
-      postId: postDetail[0].id,
-      authorId: value?.id ?? 0,
+      postId: postId,
+      authorId: currentUser?.id ?? 0,
     };
-
     try {
-      const url = 'https://disco-app-7sxty.ondigitalocean.app/api/comments';
+      const url = 'http://localhost:8000/api/comments';
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -32,6 +32,8 @@ const Comment = ({ postDetail }: CommentProps) => {
       if (response.ok) {
         const data = await response.json();
         console.log('Comment submitted successfully:', data);
+        onCommentSubmitted();
+        setComment('');
       } else {
         console.error('Failed to submit comment:', response.statusText);
       }
@@ -55,12 +57,7 @@ const Comment = ({ postDetail }: CommentProps) => {
             className="block mb-4 p-2.5 w-1/2 text-md text-gray-900 bg-gray-50 rounded-lg border h-40"
             placeholder="Add a comment here... "
           ></textarea>
-          <form
-            onSubmit={() => {
-              submitComment();
-              setComment('');
-            }}
-          >
+          <form onSubmit={(e) => submitComment(e)}>
             <div className="container mt-1 mx-auto px-8  h-16">
               <div className=" ">
                 <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
@@ -75,4 +72,4 @@ const Comment = ({ postDetail }: CommentProps) => {
   );
 };
 
-export default Comment;
+export default CommentForm;
