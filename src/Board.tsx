@@ -24,8 +24,8 @@ const Board = () => {
                 },
             });
             const { data: data } = await res.json();
-            setItems(data.board.posts);
-            console.log(data.board);
+            const acendedPosts = data.board.posts.sort((a: { id: number }, b: { id: number }) => b.id - a.id);
+            setItems(acendedPosts);
         } catch (err) {
             console.log(err);
         }

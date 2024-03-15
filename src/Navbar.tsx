@@ -77,10 +77,16 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className='hidden md:flex md:space-x-10 list-none'>
-                            <NavLink to='*' className='tracking-wide'>
+                            <NavLink
+                                to='*'
+                                className='font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out tracking-wide'
+                            >
                                 Home
                             </NavLink>
-                            <NavLink to='/aboutus' className='tracking-wide'>
+                            <NavLink
+                                to='/aboutus'
+                                className='font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out tracking-wide'
+                            >
                                 About Us
                             </NavLink>
                         </div>
