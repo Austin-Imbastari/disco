@@ -1,6 +1,10 @@
+import { useState, useContext } from "react";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
 import { CommentType } from "./PostPage";
+import { UserContext } from "./UserContext";
+import { useParams } from "react-router-dom";
 
 const CommentList = ({
     comments,
@@ -11,6 +15,11 @@ const CommentList = ({
     onCommentDeleted: () => void;
     dateFormatter: (date: string) => string;
 }) => {
+    const [edit, setEdit] = useState<boolean>(false);
+    const [edittedComment, setEdittedComment] = useState<string>("");
+    const currentUser = useContext(UserContext);
+    const { id: postId } = useParams();
+
     const handleDeleteComment = async (commentId: number) => {
         try {
             const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
@@ -29,7 +38,33 @@ const CommentList = ({
         }
     };
 
-    // have to loop thru arrau
+    const handleEditComment = async (commentId: number) => {
+        setEdit((prevState) => !prevState);
+
+        const newComment = {
+            text: edittedComment,
+            postId: postId,
+            authorId: currentUser?.id,
+        };
+
+        try {
+            const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                },
+                body: JSON.stringify(newComment),
+            });
+
+            if (response.ok) {
+                console.log("Comment updated successfully");
+                setEdittedComment("");
+            }
+        } catch (err) {
+            console.log("Failed to update comment", err);
+        }
+    };
 
     return (
         <>
@@ -58,11 +93,28 @@ const CommentList = ({
                                     onClick={() => handleDeleteComment(comment.commentId)}
                                     className='ml-2 hover:cursor-pointer'
                                 >
-                                    <MdDelete />
+                                    {currentUser?.username === comment.author ? <MdDelete /> : ""}
                                 </div>
-                                <div>
-                                    <MdEdit />
+                                <div onClick={() => setEdit((prev) => !prev)} className='ml-2 hover:cursor-pointer'>
+                                    {currentUser?.username === comment.author ? <MdEdit /> : ""}
                                 </div>
+                                {edit && currentUser?.username === comment.author ? (
+                                    <div>
+                                        <div
+                                            onClick={() => handleEditComment(comment.commentId)}
+                                            className='ml-2 hover:cursor-pointer'
+                                        >
+                                            <FaCheck />
+                                        </div>
+                                        <input
+                                            onChange={(e) => setEdittedComment(e.target.value)}
+                                            value={edittedComment}
+                                            type='text'
+                                        />
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
                     </div>
