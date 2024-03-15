@@ -67,52 +67,60 @@ const CommentList = ({
             console.log("Failed to update comment", err);
         }
     };
-
     return (
         <>
             {comments?.map((comment) => (
                 <div key={comment.commentId}>
                     <div className='mt-10 flex justify-center'>
-                        <div className='relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg'>
+                        <div className='relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg w-2/12'>
                             <div className='relative flex gap-4'>
                                 <div className='flex flex-col w-full'>
-                                    <div className='flex flex-row justify-between'>
-                                        <p className='relative text-xl whitespace-nowrap truncate overflow-hidden'>
-                                            {comment.author}
-                                        </p>
-                                        <a className='text-gray-500 text-xl' href='#'>
-                                            <i className='fa-solid fa-trash'></i>
-                                        </a>
+                                    <div className='flex flex-row justify-between items-center'>
+                                        <p className='relative text-xl whitespace-nowrap truncate '>{comment.author}</p>
+                                        <p className='text-gray-400 text-sm'>{dateFormatter(comment.createdAt)}</p>
                                     </div>
-                                    <p className='text-gray-400 text-sm'>{dateFormatter(comment.createdAt)}</p>
                                 </div>
                             </div>
-                            <p className='-mt-4 text-gray-500'>
-                                {comment.commentId} - {comment.text}
-                            </p>
-                            <div className='flex flex-row-reverse'>
-                                <div
-                                    onClick={() => handleDeleteComment(comment.commentId)}
-                                    className='ml-2 hover:cursor-pointer'
-                                >
-                                    {currentUser?.username === comment.author ? <MdDelete /> : ""}
-                                </div>
-                                <div onClick={() => setEdit((prev) => !prev)} className='ml-2 hover:cursor-pointer'>
-                                    {currentUser?.username === comment.author ? <MdEdit /> : ""}
+                            <div>
+                                <p style={{ wordBreak: "break-all" }} className='-mt-2 text-gray-500'>
+                                    {comment.text}
+                                </p>
+                            </div>
+                            <div>
+                                <div className='flex flex-row-reverse'>
+                                    <div
+                                        onClick={() => handleDeleteComment(comment.commentId)}
+                                        className='ml-2 hover:cursor-pointer'
+                                    >
+                                        {currentUser?.username === comment.author ? <MdDelete /> : ""}
+                                    </div>
+                                    <div onClick={() => setEdit((prev) => !prev)} className='ml-2 hover:cursor-pointer'>
+                                        {currentUser?.username === comment.author ? <MdEdit /> : ""}
+                                    </div>
                                 </div>
                                 {edit && currentUser?.username === comment.author ? (
-                                    <div>
+                                    <div className='mt-2'>
                                         <div
-                                            onClick={() => handleEditComment(comment.commentId)}
-                                            className='ml-2 hover:cursor-pointer'
+                                            // style={{ border: "1px solid red" }}
+                                            className='w-full  md:w-full px-3 mb-2 mt-2'
                                         >
-                                            <FaCheck />
+                                            <textarea
+                                                onChange={(e) => setEdittedComment(e.target.value)}
+                                                value={edittedComment}
+                                                style={{ border: "1px solid blue" }}
+                                                className='bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white'
+                                                name='body'
+                                                placeholder='comment...'
+                                                required
+                                            ></textarea>
+                                            <div
+                                                // style={{ border: "1px solid pink" }}
+                                                onClick={() => handleEditComment(comment.commentId)}
+                                                className='mt-2 flex justify-center hover:cursor-pointer'
+                                            >
+                                                <FaCheck />
+                                            </div>
                                         </div>
-                                        <input
-                                            onChange={(e) => setEdittedComment(e.target.value)}
-                                            value={edittedComment}
-                                            type='text'
-                                        />
                                     </div>
                                 ) : (
                                     ""
