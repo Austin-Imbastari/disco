@@ -66,3 +66,21 @@ button:active {
         color: rgb(242, 0, 255);
     }
 }
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #e8f2fe #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #e9f7e6;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 3px solid black;
+}

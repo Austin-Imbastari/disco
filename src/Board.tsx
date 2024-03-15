@@ -13,7 +13,6 @@ type PostData = {
 
 const Board = () => {
     const [items, setItems] = useState<PostData>();
-    // const [userId, setUserId] = useState<number>();
 
     const handleFetchItems = async () => {
         try {
@@ -62,6 +61,8 @@ const Board = () => {
                     border: "2.5px solid #E9F7E6",
                     borderRadius: "10px",
                     marginTop: "10px",
+                    overflowY: "auto",
+                    height: "900px",
                 }}
                 className='container mx-auto px-8 py-8'
             >
