@@ -52,6 +52,7 @@ const CommentList = ({
             const response = await fetch(url, {
                 method: "PUT",
                 headers: {
+                    "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("auth")}`,
                 },
                 body: JSON.stringify(newComment),
@@ -60,6 +61,7 @@ const CommentList = ({
             if (response.ok) {
                 console.log("Comment updated successfully");
                 setEdittedComment("");
+                onCommentDeleted();
             }
         } catch (err) {
             console.log("Failed to update comment", err);
