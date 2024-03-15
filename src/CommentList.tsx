@@ -108,7 +108,7 @@ const CommentList = ({
                                                 onChange={(e) => setEdittedComment(e.target.value)}
                                                 value={edittedComment}
                                                 style={{ border: "1px solid blue" }}
-                                                className='bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white'
+                                                className='bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700'
                                                 name='body'
                                                 placeholder='comment...'
                                                 required
