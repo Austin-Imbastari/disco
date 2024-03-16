@@ -61,8 +61,8 @@ const Board = () => {
                     border: "2.5px solid #E9F7E6",
                     borderRadius: "10px",
                     marginTop: "10px",
-                    overflowY: "auto",
-                    height: "900px",
+                    // overflowY: "auto",
+                    // height: "900px",
                 }}
                 className='container mx-auto px-8 py-8'
             >

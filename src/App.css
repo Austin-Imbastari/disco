@@ -72,7 +72,7 @@ button:active {
 }
 
 /* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
     width: 16px;
 }
 
@@ -83,4 +83,4 @@ button:active {
 *::-webkit-scrollbar-thumb {
     border-radius: 10px;
     border: 3px solid black;
-}
+} */
