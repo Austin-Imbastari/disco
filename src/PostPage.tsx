@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useCallback, useEffect, useState, useContext } from "react";
+import { UserContext } from "./UserContext";
+import { useParams, useNavigate } from "react-router-dom";
 
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -9,6 +10,10 @@ export type PostType = {
     createdAt: string;
     subject: string;
     text: string;
+    author: {
+        id: number;
+        username: string;
+    };
 }[];
 
 export type CommentType = {
@@ -31,6 +36,8 @@ export type ResponseCommentType = {
 
 const PostPage = () => {
     const { id: postId } = useParams();
+    const navigate = useNavigate();
+    const currentUser = useContext(UserContext);
     const [postInfo, setPostInfo] = useState<PostType>();
     const [comments, setComments] = useState<CommentType[]>([]);
     const [triggerCommentsUpdate, setTriggerCommentsUpdate] = useState(false);
@@ -93,6 +100,28 @@ const PostPage = () => {
         return formattedDate;
     };
 
+    // Handle Delete Posts
+    const handleDelete = async (e: React.FormEvent<HTMLFormElement>, postId: number) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch(`https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                },
+            });
+
+            if (response.status === 202) {
+                console.log("Resource deleted successfully");
+                setTriggerCommentsUpdate((prev) => !prev);
+                navigate("/*");
+            }
+        } catch (err) {
+            console.log("Post was not deleted", err);
+        }
+    };
+
     return (
         <>
             <div className='mt-20'></div>
@@ -112,10 +141,25 @@ const PostPage = () => {
                             <div className='mt-5'>
                                 <p className='leading-8 ' dangerouslySetInnerHTML={{ __html: post.text }} />
                             </div>
+                            {currentUser?.id === post.author.id ? (
+                                <div className='flex flex-row-reverse'>
+                                    <form onSubmit={(e) => handleDelete(e, post.id)}>
+                                        <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
+                                            Delete
+                                        </button>{" "}
+                                    </form>
+                                    <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2'>
+                                        Edit
+                                    </button>
+                                </div>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     ))}
                 </div>
             </div>
+
             {postId && (
                 <>
                     <CommentForm
