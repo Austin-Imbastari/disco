@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, useContext } from "react";
 import { UserContext } from "./UserContext";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
@@ -147,9 +147,11 @@ const PostPage = () => {
                                             Delete
                                         </button>{" "}
                                     </form>
-                                    <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2'>
-                                        Edit
-                                    </button>
+                                    <Link to={`/post/${post.id}/edit`}>
+                                        <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2'>
+                                            Edit
+                                        </button>
+                                    </Link>
                                 </div>
                             ) : (
                                 ""

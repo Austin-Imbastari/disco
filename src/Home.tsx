@@ -1,48 +1,32 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 // Components
-import Navbar from './Navbar';
-import AboutUs from './AboutUs';
-import SignUp from './SignUp';
-import LogOut from './LogOut';
-import Board from './Board';
-import CreatePost from './CreatePost';
-import PostPage from './PostPage';
+import Navbar from "./Navbar";
+import AboutUs from "./AboutUs";
+import SignUp from "./SignUp";
+import LogOut from "./LogOut";
+import Board from "./Board";
+import CreatePost from "./CreatePost";
+import PostPage from "./PostPage";
+import EditPost from "./EditPost";
 
 const Home = () => {
-  return (
-    <>
-      <>
-        <Navbar />
-      </>
+    return (
+        <>
+            <>
+                <Navbar />
+            </>
 
-      <Routes>
-        <Route
-          path="*"
-          element={<Board />}
-        />
-        <Route
-          path="/aboutus"
-          element={<AboutUs />}
-        />
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
-        <Route
-          path="/logout"
-          element={<LogOut />}
-        />
-        <Route
-          path="/createpost"
-          element={<CreatePost />}
-        />
-        <Route
-          path="/post/:id"
-          element={<PostPage />}
-        />
-      </Routes>
-    </>
-  );
+            <Routes>
+                <Route path='*' element={<Board />} />
+                <Route path='/aboutus' element={<AboutUs />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/logout' element={<LogOut />} />
+                <Route path='/createpost' element={<CreatePost />} />
+                <Route path='/post/:id' element={<PostPage />} />
+                <Route path='/post/:id/edit' element={<EditPost />} />
+            </Routes>
+        </>
+    );
 };
 
 export default Home;
