@@ -13,8 +13,8 @@ const CommentForm = ({ postId, onCommentSubmitted }: { postId: number; onComment
             authorId: currentUser?.id ?? 0,
         };
 
-        if (comment.length >= 350) {
-            alert("Please enter a comment with less than 350 characters");
+        if (comment.length >= 350 || comment.length === 0) {
+            alert("Please enter a comment with less than 350 characters and more than 0 characters");
             setComment("");
         } else {
             try {

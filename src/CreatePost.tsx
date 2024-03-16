@@ -46,8 +46,8 @@ const CreatePost = () => {
             authorId: currentUser.id,
         };
 
-        if (postTitle.length >= 100) {
-            alert("Title can only have 100 characters");
+        if (postTitle.length >= 100 || postTitle.length <= 5) {
+            alert("Title can only have 100 characters and more than 5 characters");
             setPostTitle("");
         } else {
             const postCreateResponse = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/posts", {
@@ -120,7 +120,7 @@ const modules = {
     toolbar: [
         [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
         [{ size: [] }],
-        ["bold", "code-block", "italic", "underline", "strike", "blockquote"],
+        ["bold", "italic", "underline", "strike", "blockquote"],
         [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
         ["link", "image", "video"],
     ],
