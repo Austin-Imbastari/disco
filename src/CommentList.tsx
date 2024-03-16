@@ -48,6 +48,9 @@ const CommentList = ({
         };
 
         try {
+            if (edittedComment.length === 0) {
+                return;
+            }
             const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
             const response = await fetch(url, {
                 method: "PUT",
