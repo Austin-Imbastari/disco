@@ -114,7 +114,6 @@ const PostPage = () => {
 
             if (response.status === 202) {
                 console.log("Resource deleted successfully");
-                setTriggerCommentsUpdate((prev) => !prev);
                 navigate("/*");
             }
         } catch (err) {
