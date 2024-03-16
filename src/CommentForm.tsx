@@ -12,26 +12,32 @@ const CommentForm = ({ postId, onCommentSubmitted }: { postId: number; onComment
             postId: postId,
             authorId: currentUser?.id ?? 0,
         };
-        try {
-            const url = "https://disco-app-7sxty.ondigitalocean.app/api/comments";
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
-                },
-                body: JSON.stringify(newComment),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                console.log("Comment submitted successfully:", data);
-                onCommentSubmitted();
-                setComment("");
-            } else {
-                console.error("Failed to submit comment:", response.statusText);
+
+        if (comment.length >= 350) {
+            alert("Please enter a comment with less than 350 characters");
+            setComment("");
+        } else {
+            try {
+                const url = "https://disco-app-7sxty.ondigitalocean.app/api/comments";
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                    },
+                    body: JSON.stringify(newComment),
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Comment submitted successfully:", data);
+                    onCommentSubmitted();
+                    setComment("");
+                } else {
+                    console.error("Failed to submit comment:", response.statusText);
+                }
+            } catch (error) {
+                console.log(error);
             }
-        } catch (error) {
-            console.log(error);
         }
     };
 
@@ -43,16 +49,21 @@ const CommentForm = ({ postId, onCommentSubmitted }: { postId: number; onComment
         <>
             <div className='mt-10 flex justify-center'>
                 <div className='w-1/2 flex flex-col justify-center items-center'>
+                    <div className='flex flex-row-reverse w-1/2'>
+                        <span className='font-thin text-sm text-gray-600'>{comment.length}/350</span>
+                    </div>
                     <textarea
                         onChange={onChangeHandler}
                         value={comment}
                         style={{ resize: "none", outline: "none" }}
                         className='block mb-4 p-2.5 w-1/2 text-md text-gray-900 bg-gray-50 rounded-lg border h-40'
                         placeholder='Add a comment here... '
+                        disabled={comment.length >= 350}
                     ></textarea>
+
                     <form onSubmit={(e) => submitComment(e)}>
                         <div className='container mt-1 mx-auto px-8  h-16'>
-                            <div className=' '>
+                            <div className=''>
                                 <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
                                     Comment
                                 </button>

@@ -46,20 +46,24 @@ const CreatePost = () => {
             authorId: currentUser.id,
         };
 
-        const postCreateResponse = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/posts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("auth")}`,
-            },
-            body: JSON.stringify(newPost),
-        });
+        if (postTitle.length >= 100) {
+            alert("Title can only have 100 characters");
+            setPostTitle("");
+        } else {
+            const postCreateResponse = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/posts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                },
+                body: JSON.stringify(newPost),
+            });
 
-        const { data: createdPostData } = await postCreateResponse.json();
-        const post = createdPostData.post;
-
-        if (post) {
-            navigate(`/post/${post.id}`);
+            const { data: createdPostData } = await postCreateResponse.json();
+            const post = createdPostData.post;
+            if (post) {
+                navigate(`/post/${post.id}`);
+            }
         }
     };
 
@@ -75,12 +79,16 @@ const CreatePost = () => {
                 className='container mx-auto px-8 py-8'
             >
                 <div>
-                    <h1 className='mb-2 font-bold text-xl'>Title</h1>
+                    <div className='flex items-center justify-between'>
+                        <h1 className='mb-2 font-bold text-xl'>Title</h1>
+                        <span className='font-thin text-sm text-gray-600'>{postTitle.length}/100</span>
+                    </div>
                     <textarea
                         onChange={handleTitleChange}
                         style={{ resize: "none", outline: "none" }}
                         className='block mb-4 p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border h-10'
                         value={postTitle}
+                        disabled={postTitle.length >= 100}
                     ></textarea>
                 </div>
                 <div>
