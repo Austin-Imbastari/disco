@@ -106,13 +106,13 @@ const SignIn = () => {
                                     autoComplete='on'
                                 />
                             </div>
-                            <div className='flex'>
+                            {/* <div className='flex'>
                                 <div className='w-full'>
                                     <a className='font-bold text-blue-600' href=''>
                                         Forgot password?
                                     </a>
                                 </div>
-                            </div>
+                            </div> */}
                             <div>
                                 <input
                                     className='bg-[#E9F7E6] w-full py-2 rounded-md text-black font-bold cursor-pointer hover:bg-[#E8F2FE]'
