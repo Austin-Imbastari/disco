@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 const EditPost = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
-
     const [postTitle, setPostTitle] = useState<string>(state.title);
     const [valueHtml, setValueHtml] = useState<string>(state.body);
 

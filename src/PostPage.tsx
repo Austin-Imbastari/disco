@@ -120,6 +120,8 @@ const PostPage = () => {
             console.log("Post was not deleted", err);
         }
     };
+    console.log("Current User:", currentUser);
+    console.log("Post Info:", postInfo);
 
     return (
         <>
@@ -140,7 +142,7 @@ const PostPage = () => {
                             <div className='mt-5'>
                                 <p className='leading-8 ' dangerouslySetInnerHTML={{ __html: post.text }} />
                             </div>
-                            {currentUser?.id === post.author.id ? (
+                            {currentUser?.id === post.author.id || currentUser?.role === "ADMIN" ? (
                                 <div className='flex flex-row-reverse'>
                                     <form onSubmit={(e) => handleDelete(e, post.id)}>
                                         <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>

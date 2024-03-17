@@ -95,10 +95,18 @@ const CommentList = ({
                                         onClick={() => handleDeleteComment(comment.commentId)}
                                         className='ml-2 hover:cursor-pointer'
                                     >
-                                        {currentUser?.username === comment.author ? <MdDelete /> : ""}
+                                        {currentUser?.username === comment.author || currentUser?.role === "ADMIN" ? (
+                                            <MdDelete />
+                                        ) : (
+                                            ""
+                                        )}
                                     </div>
                                     <div onClick={() => setEdit((prev) => !prev)} className='ml-2 hover:cursor-pointer'>
-                                        {currentUser?.username === comment.author ? <MdEdit /> : ""}
+                                        {currentUser?.username === comment.author || currentUser?.role === "ADMIN" ? (
+                                            <MdEdit />
+                                        ) : (
+                                            ""
+                                        )}
                                     </div>
                                 </div>
                                 {edit && currentUser?.username === comment.author ? (
