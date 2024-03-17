@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const EditPost = () => {
     const navigate = useNavigate();
-    const [postTitle, setPostTitle] = useState<string>("");
-    const [valueHtml, setValueHtml] = useState<string>("");
+    const { state } = useLocation();
+    console.log(state);
+
+    const [postTitle, setPostTitle] = useState<string>(state.title);
+    const [valueHtml, setValueHtml] = useState<string>(state.body);
 
     const handleEditorChange = (value: string) => {
         setValueHtml(value);
@@ -65,6 +68,8 @@ const EditPost = () => {
             }
         }
     };
+
+    console.log(postTitle);
 
     return (
         <>
@@ -146,3 +151,9 @@ const formats = [
 ];
 
 export default EditPost;
+
+/*
+!TODO
+![] should be able to see the previous title and text from post
+![] should be able to see the previous comment in the comments 
+*/

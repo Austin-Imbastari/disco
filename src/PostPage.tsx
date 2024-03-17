@@ -147,7 +147,7 @@ const PostPage = () => {
                                             Delete
                                         </button>{" "}
                                     </form>
-                                    <Link to={`/post/${post.id}/edit`}>
+                                    <Link to={`/post/${post.id}/edit`} state={{ title: post.subject, body: post.text }}>
                                         <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2'>
                                             Edit
                                         </button>
