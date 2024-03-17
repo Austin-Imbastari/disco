@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignIn = () => {
     const navigate = useNavigate();
     const [credentials, setCredentials] = useState<{
         username: string;
@@ -117,8 +117,19 @@ const SignUp = () => {
                                 <input
                                     className='bg-[#E9F7E6] w-full py-2 rounded-md text-black font-bold cursor-pointer hover:bg-[#E8F2FE]'
                                     type='submit'
-                                    value='Sign Up'
+                                    value='Sign In'
                                 />
+                            </div>
+                            <div>
+                                <p className='text-center'>Or continue with</p>
+                            </div>
+                            <div className='flex gap-4'>
+                                <button className='bg-[#E8F2FE] w-1/2 py-1 rounded-md text-black font-bold cursor-pointer hover:bg-[#E9F7E6]'>
+                                    Demo User
+                                </button>
+                                <button className='bg-[#E8F2FE] w-1/2 py-1 rounded-md text-black font-bold cursor-pointer hover:bg-[#E9F7E6]'>
+                                    Admin User
+                                </button>
                             </div>
                         </div>
                         <p className='text-sm text-gray-500 mt-10'>
@@ -134,4 +145,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default SignIn;
