@@ -102,7 +102,7 @@ const SignUp = () => {
                                     name='password'
                                     value={credentials.password}
                                     onChange={handlePasswordChange}
-                                    placeholder='username'
+                                    placeholder=''
                                     autoComplete='on'
                                 />
                             </div>
@@ -114,12 +114,6 @@ const SignUp = () => {
                                 />
                             </div>
                         </div>
-                        <p className='text-sm text-gray-500 mt-10'>
-                            Not a member?{" "}
-                            <a href='#' className='text-[black] font-bold'>
-                                create account
-                            </a>
-                        </p>
                     </div>
                 </div>
             </form>

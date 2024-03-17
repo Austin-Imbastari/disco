@@ -77,7 +77,7 @@ const SignIn = () => {
             <form onSubmit={handleOnSubmit}>
                 <div className='bg-[#F9FAFB] h-screen w-screen flex items-center'>
                     <div className='h-max mx-auto flex flex-col items-center'>
-                        <h1 className='text-xl font-bold text-center pb-10'>Sign Up</h1>
+                        <h1 className='text-xl font-bold text-center pb-10'>Login</h1>
                         <div className='bg-white shadow-xl p-10 flex flex-col gap-4 text-sm'>
                             <div>
                                 <label className='text-gray-600 font-bold inline-block pb-2' htmlFor='username'>
@@ -102,7 +102,7 @@ const SignIn = () => {
                                     name='password'
                                     value={credentials.password}
                                     onChange={handlePasswordChange}
-                                    placeholder='username'
+                                    placeholder=''
                                     autoComplete='on'
                                 />
                             </div>
@@ -117,7 +117,7 @@ const SignIn = () => {
                                 <input
                                     className='bg-[#E9F7E6] w-full py-2 rounded-md text-black font-bold cursor-pointer hover:bg-[#E8F2FE]'
                                     type='submit'
-                                    value='Sign In'
+                                    value='Login'
                                 />
                             </div>
                             <div>
@@ -132,12 +132,6 @@ const SignIn = () => {
                                 </button>
                             </div>
                         </div>
-                        <p className='text-sm text-gray-500 mt-10'>
-                            Not a member?{" "}
-                            <a href='#' className='text-[black] font-bold'>
-                                create account
-                            </a>
-                        </p>
                     </div>
                 </div>
             </form>
