@@ -60,6 +60,8 @@ const CreatePost = () => {
 
             const { data: createdPostData } = await postCreateResponse.json();
             const post = createdPostData.post;
+            console.log(typeof post.id);
+
             if (post) {
                 navigate(`/post/${post.id}`);
             }

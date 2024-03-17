@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 const EditPost = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
-    console.log(state);
 
     const [postTitle, setPostTitle] = useState<string>(state.title);
     const [valueHtml, setValueHtml] = useState<string>(state.body);
@@ -48,28 +47,31 @@ const EditPost = () => {
             authorId: currentUser.id,
         };
 
-        if (postTitle.length >= 100 || postTitle.length <= 5) {
-            alert("Title can only have 100 characters and more than 5 characters");
-            setPostTitle("");
-        } else {
-            const postCreateResponse = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/posts", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${localStorage.getItem("auth")}`,
-                },
-                body: JSON.stringify(newPost),
-            });
-
-            const { data: createdPostData } = await postCreateResponse.json();
-            const post = createdPostData.post;
-            if (post) {
-                navigate(`/post/${post.id}`);
+        try {
+            if (postTitle.length >= 100 || postTitle.length <= 5) {
+                alert("Title can only have 100 characters and more than 5 characters");
+                setPostTitle("");
+            } else {
+                const postCreateResponse = await fetch(
+                    `https://disco-app-7sxty.ondigitalocean.app/api/posts/${state.postId}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                        },
+                        body: JSON.stringify(newPost),
+                    }
+                );
+                if (!postCreateResponse.ok) {
+                    throw new Error(`Failed to update post: ${postCreateResponse.statusText}`);
+                }
+                navigate(`/post/${state.postId}`);
             }
+        } catch (err) {
+            console.log(err);
         }
     };
-
-    console.log(postTitle);
 
     return (
         <>
