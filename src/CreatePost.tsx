@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import sanitizeHtml from "sanitize-html";
 
 const CreatePost = () => {
     const navigate = useNavigate();
@@ -10,12 +11,14 @@ const CreatePost = () => {
     const [valueHtml, setValueHtml] = useState<string>("");
 
     const handleEditorChange = (value: string) => {
-        setValueHtml(value);
+        const clean = sanitizeHtml(value);
+        setValueHtml(clean);
     };
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = e.target.value;
-        setPostTitle(value);
+        const clean = sanitizeHtml(value);
+        setPostTitle(clean);
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
