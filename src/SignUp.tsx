@@ -3,6 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const [userType, setUserType] = useState<{
+        demoUser: boolean;
+        adminUser: boolean;
+    }>({
+        demoUser: false,
+        adminUser: false,
+    });
+
     const [credentials, setCredentials] = useState<{
         username: string;
         password: string;
@@ -25,12 +33,37 @@ const SignUp = () => {
         });
     };
 
+    const handleDemoUser = async () => {
+        setUserType((prevState) => ({
+            ...prevState,
+            demoUser: true,
+        }));
+        try {
+            const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/auth/signin/demo-user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                const { data } = await response.json();
+                localStorage.setItem("auth", data.token);
+
+                navigate("/*");
+            }
+        } catch (err) {
+            console.log("Demo User Login was unsuccessful", err);
+        }
+    };
+
     const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const regex = /^[a-zA-Z0-9_]+$/;
 
         try {
             if (
+                !userType.demoUser &&
                 credentials.username.length <= 12 &&
                 credentials.username.length >= 6 &&
                 regex.test(credentials.username) &&
@@ -62,7 +95,7 @@ const SignUp = () => {
                 });
                 navigate("/*");
                 window.location.reload();
-            } else {
+            } else if (!userType.demoUser) {
                 alert(
                     "Please only create username with no more than 12 character & if you choose special characters only use an underscore!"
                 );
@@ -112,6 +145,20 @@ const SignUp = () => {
                                     type='submit'
                                     value='Sign Up'
                                 />
+                            </div>
+                            <div>
+                                <p className='text-center'>Or continue with</p>
+                            </div>
+                            <div className='flex gap-4'>
+                                <button
+                                    onClick={handleDemoUser}
+                                    className='bg-[#E8F2FE] w-1/2 py-1 rounded-md text-black font-bold cursor-pointer hover:bg-[#E9F7E6]'
+                                >
+                                    Demo User
+                                </button>
+                                <button className='bg-[#E8F2FE] w-1/2 py-1 rounded-md text-black font-bold cursor-pointer hover:bg-[#E9F7E6]'>
+                                    Admin User
+                                </button>
                             </div>
                         </div>
                     </div>
