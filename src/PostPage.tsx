@@ -100,7 +100,6 @@ const PostPage = () => {
         return formattedDate;
     };
 
-    // Handle Delete Posts
     const handleDelete = async (e: React.FormEvent<HTMLFormElement>, postId: number) => {
         e.preventDefault();
 
@@ -142,26 +141,26 @@ const PostPage = () => {
                             <div className='mt-5'>
                                 <p className='leading-8 ' dangerouslySetInnerHTML={{ __html: post.text }} />
                             </div>
-                            {currentUser?.id === post.author.id ? (
+                            {currentUser && (
                                 <div className='flex flex-row-reverse'>
-                                    {currentUser?.role === "ADMIN" && (
+                                    {(currentUser.role === "ADMIN" || currentUser.id === post.author.id) && (
                                         <form onSubmit={(e) => handleDelete(e, post.id)}>
                                             <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
                                                 Delete
                                             </button>{" "}
                                         </form>
                                     )}
-                                    <Link
-                                        to={`/post/${post.id}/edit`}
-                                        state={{ title: post.subject, body: post.text, postId: post.id }}
-                                    >
-                                        <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2'>
-                                            Edit
-                                        </button>
-                                    </Link>
+                                    {currentUser.id === post.author.id && (
+                                        <Link
+                                            to={`/post/${post.id}/edit`}
+                                            state={{ title: post.subject, body: post.text, postId: post.id }}
+                                        >
+                                            <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2'>
+                                                Edit
+                                            </button>
+                                        </Link>
+                                    )}
                                 </div>
-                            ) : (
-                                ""
                             )}
                         </div>
                     ))}

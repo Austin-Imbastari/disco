@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
     const navigate = useNavigate();
+
     const [userType, setUserType] = useState<{
         demoUser: boolean;
         adminUser: boolean;
@@ -41,19 +42,36 @@ const SignUp = () => {
         try {
             const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/auth/signin/demo-user", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
             });
-
             if (response.ok) {
                 const { data } = await response.json();
                 localStorage.setItem("auth", data.token);
-
                 navigate("/*");
+                window.location.reload();
             }
         } catch (err) {
             console.log("Demo User Login was unsuccessful", err);
+        }
+    };
+
+    const handleAdminUser = async () => {
+        setUserType((prevState) => ({
+            ...prevState,
+            adminUser: true,
+        }));
+
+        try {
+            const response = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/auth/signin/demo-admin", {
+                method: "POST",
+            });
+            if (response.ok) {
+                const { data } = await response.json();
+                localStorage.setItem("auth", data.token);
+                navigate("/*");
+                window.location.reload();
+            }
+        } catch (err) {
+            console.log("Admin User login is unsuccessful", err);
         }
     };
 
@@ -63,6 +81,7 @@ const SignUp = () => {
 
         try {
             if (
+                !userType.adminUser &&
                 !userType.demoUser &&
                 credentials.username.length <= 12 &&
                 credentials.username.length >= 6 &&
@@ -95,7 +114,7 @@ const SignUp = () => {
                 });
                 navigate("/*");
                 window.location.reload();
-            } else if (!userType.demoUser) {
+            } else if (!userType.demoUser && !userType.adminUser) {
                 alert(
                     "Please only create username with no more than 12 character & if you choose special characters only use an underscore!"
                 );
@@ -156,7 +175,10 @@ const SignUp = () => {
                                 >
                                     Demo User
                                 </button>
-                                <button className='bg-[#E8F2FE] w-1/2 py-1 rounded-md text-black font-bold cursor-pointer hover:bg-[#E9F7E6]'>
+                                <button
+                                    onClick={handleAdminUser}
+                                    className='bg-[#E8F2FE] w-1/2 py-1 rounded-md text-black font-bold cursor-pointer hover:bg-[#E9F7E6]'
+                                >
                                     Admin User
                                 </button>
                             </div>
