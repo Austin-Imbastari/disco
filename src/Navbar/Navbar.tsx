@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import AboutUsLink from './AboutUsButton';
+import AboutUsLink from './AboutUsLink';
 import DiscoLogo from './DiscoLogo';
-import HomeLink from './HomeButton';
+import HomeLink from './HomeLink';
 import LogOutButton from './LogOutButton';
 import MenuButton from './MenuButton';
 import SignInButton from './SignInButton';
