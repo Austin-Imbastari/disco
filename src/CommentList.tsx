@@ -102,11 +102,7 @@ const CommentList = ({
                                         )}
                                     </div>
                                     <div onClick={() => setEdit((prev) => !prev)} className='ml-2 hover:cursor-pointer'>
-                                        {currentUser?.username === comment.author || currentUser?.role === "ADMIN" ? (
-                                            <MdEdit />
-                                        ) : (
-                                            ""
-                                        )}
+                                        {currentUser?.username === comment.author ? <MdEdit /> : ""}
                                     </div>
                                 </div>
                                 {edit && currentUser?.username === comment.author ? (
