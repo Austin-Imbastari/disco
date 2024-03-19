@@ -26,7 +26,7 @@ export const UserProvider = (props: UserProviderProps) => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('auth')}`,
             },
-          }
+          },
         );
         const { data: currentUserData } = await currentUserGetResponse.json();
         const currentUser = currentUserData.user;

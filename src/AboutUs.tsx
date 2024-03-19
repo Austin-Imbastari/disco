@@ -11,10 +11,7 @@ const AboutUs = () => {
           <h1 className="text-center ">About Us</h1>
         </div>
         <div className="flex justify-center">
-          <img
-            src={ProgrammingSvg}
-            alt="programming"
-          />
+          <img src={ProgrammingSvg} alt="programming" />
         </div>
         <div className="flex justify-center flex-col items-center w-100 mt-10">
           <div className="flex justify-center flex-col items-center w-1/2">
@@ -49,10 +46,7 @@ const AboutUs = () => {
             </div>
             <div className="flex space-x-36 mt-10 mb-20">
               <div>
-                <a
-                  href="https://github.com/jpnws"
-                  target="_blank"
-                >
+                <a href="https://github.com/jpnws" target="_blank">
                   <img
                     className="rounded-full scale-75"
                     src={Jiggy}
@@ -65,10 +59,7 @@ const AboutUs = () => {
                 </a>
               </div>
               <div>
-                <a
-                  href="https://github.com/Austin-Imbastari"
-                  target="_blank"
-                >
+                <a href="https://github.com/Austin-Imbastari" target="_blank">
                   <img
                     className="rounded-full scale-75"
                     src={Good}
@@ -85,10 +76,7 @@ const AboutUs = () => {
         </div>
         <div>
           <div className="mt-20 mb-10">
-            <img
-              src={ComputerSvg}
-              alt="computer-svg"
-            />
+            <img src={ComputerSvg} alt="computer-svg" />
           </div>
         </div>
       </div>
