@@ -1,21 +1,19 @@
 import { Route, Routes } from 'react-router-dom';
 // Components
-import Navbar from './Navbar';
 import AboutUs from './AboutUs';
-import SignUp from './SignUp';
-import LogOut from './LogOut';
 import Board from './Board';
 import CreatePost from './CreatePost';
-import PostPage from './PostPage';
 import EditPost from './EditPost';
+import LogOut from './Navbar/LogOutButton';
+import Navbar from './Navbar/Navbar';
+import PostPage from './PostPage';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 const Home = () => {
   return (
     <>
-      <>
-        <Navbar />
-      </>
+      <Navbar />
       <Routes>
         <Route path="*" element={<Board />} />
         <Route path="/aboutus" element={<AboutUs />} />
