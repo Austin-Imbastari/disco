@@ -1,28 +1,27 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-const LogOut = () => {
+const LogOutButton = () => {
   const navigate = useNavigate();
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const url = "https://disco-app-7sxty.ondigitalocean.app/api/auth/signout";
+      const url = 'https://disco-app-7sxty.ondigitalocean.app/api/auth/signout';
 
       const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+          Authorization: `Bearer ${localStorage.getItem('auth')}`,
         },
       });
 
       if (response.ok) {
-        localStorage.removeItem("auth");
+        localStorage.removeItem('auth');
         window.location.reload();
-        navigate("/*");
+        navigate('/*');
       } else {
-        console.error("POST request failed with status:", response.status);
+        console.error('POST request failed with status:', response.status);
       }
     } catch (err) {
       console.log(err);
@@ -40,4 +39,4 @@ const LogOut = () => {
   );
 };
 
-export default LogOut;
+export default LogOutButton;
