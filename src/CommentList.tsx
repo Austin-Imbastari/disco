@@ -5,6 +5,7 @@ import { FaCheck } from 'react-icons/fa';
 import { CommentType } from './PostPage';
 import { UserContext } from './UserContext';
 import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const CommentList = ({
   comments,
@@ -102,7 +103,9 @@ const CommentList = ({
               </div>
               <div>
                 <div className="flex flex-row-reverse">
-                  <div
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
                     onClick={() => handleDeleteComment(comment.commentId)}
                     className="ml-2 hover:cursor-pointer"
                   >
@@ -112,13 +115,15 @@ const CommentList = ({
                     ) : (
                       ''
                     )}
-                  </div>
-                  <div
+                  </motion.div>
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.8 }}
                     onClick={() => handleEditComment(comment.commentId)}
                     className="ml-2 hover:cursor-pointer"
                   >
                     {currentUser?.username === comment.author ? <MdEdit /> : ''}
-                  </div>
+                  </motion.div>
                 </div>
                 {editedCommentId === comment.commentId ? (
                   <div className="mt-2">
@@ -134,12 +139,14 @@ const CommentList = ({
                         placeholder="comment..."
                         required
                       ></textarea>
-                      <div
+                      <motion.div
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.8 }}
                         onClick={() => handleEditComment(comment.commentId)}
                         className="mt-2 flex justify-center hover:cursor-pointer"
                       >
                         <FaCheck />
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
                 ) : (

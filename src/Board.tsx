@@ -59,9 +59,13 @@ const Board = () => {
       <div className="container mt-10 mx-auto px-8 relative h-16 ">
         <div className="absolute bottom-0 right-0">
           <Link to="/createpost">
-            <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200"
+            >
               Create Post
-            </button>
+            </motion.button>
           </Link>
         </div>
       </div>

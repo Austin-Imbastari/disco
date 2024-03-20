@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import sanitizeHtml from 'sanitize-html';
+import { motion } from 'framer-motion';
+import { createPostAnimation } from './animations';
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -78,7 +80,10 @@ const CreatePost = () => {
   return (
     <>
       <div className="mt-20"></div>
-      <div
+      <motion.div
+        variants={createPostAnimation}
+        initial="hidden"
+        animate="show"
         style={{
           border: '2.5px solid #E8F2FE',
           borderRadius: '10px',
@@ -114,14 +119,18 @@ const CreatePost = () => {
           <form onSubmit={handleSubmit}>
             <div className="container mt-1 mx-auto px-8 relative h-16">
               <div className="absolute bottom-0 right-0 ">
-                <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200"
+                >
                   Submit Post
-                </button>
+                </motion.button>
               </div>
             </div>
           </form>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
