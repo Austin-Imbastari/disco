@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BoardPostItem } from './BoardPostItem';
+import { motion } from 'framer-motion';
 import { boardItemAnimation, itemsBoard } from './animations';
 
 type PostData = {

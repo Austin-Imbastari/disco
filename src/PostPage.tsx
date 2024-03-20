@@ -134,8 +134,6 @@ const PostPage = () => {
       console.log('Post was not deleted', err);
     }
   };
-  console.log('Current User:', currentUser);
-  console.log('Post Info:', postInfo);
 
   return (
     <motion.div
