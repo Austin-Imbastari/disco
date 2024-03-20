@@ -111,12 +111,14 @@ export const boardItemAnimation = {
   hidden: {
     opacity: 0,
     transition: {
+      when: 'beforeChildren',
       staggerChildren: 0.9,
     },
   },
   show: {
     opacity: 1,
     transition: {
+      when: 'afterChildren',
       delayChildren: 0.5,
       staggerChildren: 0.2,
     },
@@ -125,7 +127,7 @@ export const boardItemAnimation = {
 
 export const itemsBoard = {
   hidden: {
-    y: '100%',
+    y: '300%',
   },
   show: {
     y: '0%',
