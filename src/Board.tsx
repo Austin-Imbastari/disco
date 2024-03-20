@@ -1,7 +1,7 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BoardPostItem } from './BoardPostItem';
-import { motion } from 'framer-motion';
 import { boardItemAnimation, itemsBoard } from './animations';
 
 type PostData = {
@@ -15,6 +15,7 @@ type PostData = {
 
 const Board = () => {
   const [items, setItems] = useState<PostData>();
+  const [shouldShow, setShouldShow] = useState(false);
 
   const handleFetchItems = async () => {
     try {
@@ -30,6 +31,9 @@ const Board = () => {
         (a: { id: number }, b: { id: number }) => b.id - a.id,
       );
       setItems(acendedPosts);
+      setTimeout(() => {
+        setShouldShow(true);
+      }, 500);
     } catch (err) {
       console.log(err);
     }
@@ -63,8 +67,8 @@ const Board = () => {
       </div>
       <motion.div
         variants={boardItemAnimation}
-        initial="hidden"
-        animate="show"
+        initial={false}
+        animate={shouldShow ? 'show' : 'hidden'}
         style={{
           border: '2.5px solid #E9F7E6',
           borderRadius: '10px',
