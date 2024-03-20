@@ -1,6 +1,8 @@
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BoardPostItem } from './BoardPostItem';
+import { boardItemAnimation, itemsBoard } from './animations';
 
 type PostData = {
   id: number;
@@ -13,6 +15,7 @@ type PostData = {
 
 const Board = () => {
   const [items, setItems] = useState<PostData>();
+  const [shouldShow, setShouldShow] = useState(false);
 
   const handleFetchItems = async () => {
     try {
@@ -28,6 +31,9 @@ const Board = () => {
         (a: { id: number }, b: { id: number }) => b.id - a.id,
       );
       setItems(acendedPosts);
+      setTimeout(() => {
+        setShouldShow(true);
+      }, 500);
     } catch (err) {
       console.log(err);
     }
@@ -59,18 +65,20 @@ const Board = () => {
           </Link>
         </div>
       </div>
-      <div
+      <motion.div
+        variants={boardItemAnimation}
+        initial={false}
+        animate={shouldShow ? 'show' : 'hidden'}
         style={{
           border: '2.5px solid #E9F7E6',
           borderRadius: '10px',
           marginTop: '10px',
-          // overflowY: "auto",
-          // height: "900px",
+          overflow: 'hidden',
         }}
         className="container mx-auto px-8 py-8"
       >
         {items?.map((item) => (
-          <div key={item.id}>
+          <motion.div variants={itemsBoard} key={item.id}>
             <Link to={'/post/' + item.id}>
               <BoardPostItem
                 author={item.author.username}
@@ -78,9 +86,9 @@ const Board = () => {
                 createdDate={dateFormatter(item.createdAt)}
               />
             </Link>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </>
   );
 };

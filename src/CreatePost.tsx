@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import sanitizeHtml from "sanitize-html";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import sanitizeHtml from 'sanitize-html';
 
 const CreatePost = () => {
   const navigate = useNavigate();
-  const [postTitle, setPostTitle] = useState<string>("");
-  const [valueHtml, setValueHtml] = useState<string>("");
+  const [postTitle, setPostTitle] = useState<string>('');
+  const [valueHtml, setValueHtml] = useState<string>('');
 
   const handleEditorChange = (value: string) => {
     const clean = sanitizeHtml(value);
@@ -25,18 +25,21 @@ const CreatePost = () => {
     e.preventDefault();
 
     if (postTitle.length <= 0 && valueHtml.length <= 0) {
-      alert("You must enter a post!");
+      alert('You must enter a post!');
       return;
     }
 
-    const productionUrl = "https://disco-app-7sxty.ondigitalocean.app";
+    const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
 
-    const currentUserGetResponse = await fetch(`${productionUrl}/api/users/current`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("auth")}`,
+    const currentUserGetResponse = await fetch(
+      `${productionUrl}/api/users/current`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('auth')}`,
+        },
       },
-    });
+    );
 
     const { data: currentUserData } = await currentUserGetResponse.json();
     const currentUser = currentUserData.user;
@@ -49,17 +52,20 @@ const CreatePost = () => {
     };
 
     if (postTitle.length >= 100 || postTitle.length <= 5) {
-      alert("Title can only have 100 characters and more than 5 characters");
-      setPostTitle("");
+      alert('Title can only have 100 characters and more than 5 characters');
+      setPostTitle('');
     } else {
-      const postCreateResponse = await fetch("https://disco-app-7sxty.ondigitalocean.app/api/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+      const postCreateResponse = await fetch(
+        'https://disco-app-7sxty.ondigitalocean.app/api/posts',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('auth')}`,
+          },
+          body: JSON.stringify(newPost),
         },
-        body: JSON.stringify(newPost),
-      });
+      );
 
       const { data: createdPostData } = await postCreateResponse.json();
       const post = createdPostData.post;
@@ -71,24 +77,26 @@ const CreatePost = () => {
 
   return (
     <>
-      <div className='mt-20'></div>
+      <div className="mt-20"></div>
       <div
         style={{
-          border: "2.5px solid #E8F2FE",
-          borderRadius: "10px",
-          marginTop: "10px",
+          border: '2.5px solid #E8F2FE',
+          borderRadius: '10px',
+          marginTop: '10px',
         }}
-        className='container mx-auto px-8 py-8'
+        className="container mx-auto px-8 py-8"
       >
         <div>
-          <div className='flex items-center justify-between'>
-            <h1 className='mb-2 font-bold text-xl'>Title</h1>
-            <span className='font-thin text-sm text-gray-600'>{postTitle.length}/100</span>
+          <div className="flex items-center justify-between">
+            <h1 className="mb-2 font-bold text-xl">Title</h1>
+            <span className="font-thin text-sm text-gray-600">
+              {postTitle.length}/100
+            </span>
           </div>
           <textarea
             onChange={handleTitleChange}
-            style={{ resize: "none", outline: "none" }}
-            className='block mb-4 p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border h-10'
+            style={{ resize: 'none', outline: 'none' }}
+            className="block mb-4 p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border h-10"
             value={postTitle}
             disabled={postTitle.length >= 100}
           ></textarea>
@@ -99,14 +107,14 @@ const CreatePost = () => {
             value={valueHtml}
             formats={formats}
             modules={modules}
-            theme='snow'
+            theme="snow"
           />
         </div>
         <div>
           <form onSubmit={handleSubmit}>
-            <div className='container mt-1 mx-auto px-8 relative h-16'>
-              <div className='absolute bottom-0 right-0 '>
-                <button className='bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200'>
+            <div className="container mt-1 mx-auto px-8 relative h-16">
+              <div className="absolute bottom-0 right-0 ">
+                <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
                   Submit Post
                 </button>
               </div>
@@ -121,9 +129,14 @@ const CreatePost = () => {
 const modules = {
   toolbar: [
     [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
-    ["link", "image", "video"],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [
+      { list: 'ordered' },
+      { list: 'bullet' },
+      { indent: '-1' },
+      { indent: '+1' },
+    ],
+    ['link', 'image', 'video'],
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
@@ -132,20 +145,20 @@ const modules = {
 };
 
 const formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-  "video",
+  'header',
+  'font',
+  'size',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'link',
+  'image',
+  'video',
 ];
 
 export default CreatePost;
