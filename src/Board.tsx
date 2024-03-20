@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BoardPostItem } from './BoardPostItem';
 import { motion } from 'framer-motion';
-import { boardAnimation, boardItemAnimation, itemsBoard } from './animations';
+import { boardItemAnimation, itemsBoard } from './animations';
 
 type PostData = {
   id: number;
@@ -69,6 +69,7 @@ const Board = () => {
           border: '2.5px solid #E9F7E6',
           borderRadius: '10px',
           marginTop: '10px',
+          overflow: 'hidden',
         }}
         className="container mx-auto px-8 py-8"
       >
