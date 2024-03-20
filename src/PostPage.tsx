@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { motion } from 'framer-motion';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+
 import { UserContext } from './UserContext';
-import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+
+import { postPageAnimation } from './animations';
 
 export type PostType = {
   id: number;
@@ -134,7 +138,12 @@ const PostPage = () => {
   console.log('Post Info:', postInfo);
 
   return (
-    <>
+    <motion.div
+      variants={postPageAnimation}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+    >
       <div className="mt-20"></div>
       <div
         style={{
@@ -199,7 +208,7 @@ const PostPage = () => {
           />
         </>
       )}
-    </>
+    </motion.div>
   );
 };
 
