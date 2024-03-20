@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BoardPostItem } from './BoardPostItem';
+import { motion } from 'framer-motion';
+import { boardAnimation, boardItemAnimation, itemsBoard } from './animations';
 
 type PostData = {
   id: number;
@@ -59,18 +61,19 @@ const Board = () => {
           </Link>
         </div>
       </div>
-      <div
+      <motion.div
+        variants={boardItemAnimation}
+        initial="hidden"
+        animate="show"
         style={{
           border: '2.5px solid #E9F7E6',
           borderRadius: '10px',
           marginTop: '10px',
-          // overflowY: "auto",
-          // height: "900px",
         }}
         className="container mx-auto px-8 py-8"
       >
         {items?.map((item) => (
-          <div key={item.id}>
+          <motion.div variants={itemsBoard} key={item.id}>
             <Link to={'/post/' + item.id}>
               <BoardPostItem
                 author={item.author.username}
@@ -78,9 +81,9 @@ const Board = () => {
                 createdDate={dateFormatter(item.createdAt)}
               />
             </Link>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </>
   );
 };
