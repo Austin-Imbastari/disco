@@ -1,15 +1,28 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 
-type FetchOptions = {
+type FetchOptions<S> = {
   options: {
     url: string;
     method: 'POST' | 'GET' | 'PUT' | 'DELETE';
     token: string | null;
+    onSuccess?: (...args: S[]) => void;
   };
 };
 
-export const useFetch = <T>({ options }: FetchOptions) => {
-  const [items, setItems] = useState<T>();
+const useCallbackRef = <Y>(callback: Y) => {
+  const callbackRef = useRef(callback);
+  useLayoutEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+  return callbackRef;
+};
+
+export const useFetch = <T, S>({ options }: FetchOptions<S>) => {
+  const [data, setData] = useState<T>();
+
+  const savedOnSuccess = useCallbackRef<typeof options.onSuccess>(
+    options.onSuccess,
+  );
 
   useEffect(() => {
     const bearerHeader = options.token ? `Bearer ${options.token}` : null;
@@ -22,15 +35,12 @@ export const useFetch = <T>({ options }: FetchOptions) => {
     fetch(options.url, requestInit)
       .then((response) => response.json())
       .then((json) => {
-        setItems(json);
+        savedOnSuccess.current?.();
+        setData(json);
       });
-  }, [options.url, options.method, options.token]);
+  }, [options.url, options.method, options.token, savedOnSuccess]);
 
-  return {
-    items,
-  };
+  console.log(data);
+
+  return data as T;
 };
-
-// setTimeout(() => {
-//   options.setShouldShow(true);
-// }, 500);

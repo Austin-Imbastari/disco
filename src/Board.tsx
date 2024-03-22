@@ -1,47 +1,76 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BoardPostItem } from './BoardPostItem';
 import { motion } from 'framer-motion';
 import { boardItemAnimation, itemsBoard } from './animations';
+import { useFetch } from './useFetch';
 
 type PostData = {
   id: number;
   subject: string;
   createdAt: string;
   author: {
+    id: number;
     username: string;
   };
-}[];
+};
+
+type BoardData = {
+  data: {
+    board: {
+      id: number;
+      name: string;
+      posts: PostData[];
+    };
+  };
+};
 
 const Board = () => {
-  const [items, setItems] = useState<PostData>();
+  // const [items, setItems] = useState<PostData>();
   const [shouldShow, setShouldShow] = useState(false);
 
-  const handleFetchItems = async () => {
-    try {
-      const url =
-        'https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts';
-      const res = await fetch(url, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('auth')}`,
-        },
-      });
-      const { data: data } = await res.json();
-      const acendedPosts = data.board.posts.sort(
-        (a: { id: number }, b: { id: number }) => b.id - a.id,
-      );
-      setItems(acendedPosts);
-      setTimeout(() => {
-        setShouldShow(true);
-      }, 500);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const boardData = useFetch<BoardData, null>({
+    options: {
+      url: 'https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts',
+      method: 'GET',
+      token: localStorage.getItem('auth'),
+      onSuccess: () => {
+        setTimeout(() => {
+          setShouldShow(true);
+        }, 500);
+      },
+    },
+  });
+  console.log(boardData);
+  const items = boardData.data.board.posts.sort(
+    (a: { id: number }, b: { id: number }) => b.id - a.id,
+  );
 
-  useEffect(() => {
-    handleFetchItems();
-  }, []);
+  // const handleFetchItems = async () => {
+  //   try {
+  //     const url =
+  //       'https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts';
+  //     const res = await fetch(url, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('auth')}`,
+  //       },
+  //     });
+  //     const { data: data } = await res.json();
+  //     const acendedPosts = data.board.posts.sort(
+  //       (a: { id: number }, b: { id: number }) => b.id - a.id,
+  //     );
+  //     setItems(acendedPosts);
+  //     setTimeout(() => {
+  //       setShouldShow(true);
+  //     }, 500);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   handleFetchItems();
+  // }, []);
 
   const dateFormatter = (date: string) => {
     const dateString = date;
