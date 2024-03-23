@@ -9,12 +9,13 @@ type PostData = {
   subject: string;
   createdAt: string;
   author: {
+    id: number;
     username: string;
   };
-}[];
+};
 
 const Board = () => {
-  const [items, setItems] = useState<PostData>();
+  const [items, setItems] = useState<PostData[]>();
   const [shouldShow, setShouldShow] = useState(false);
 
   const handleFetchItems = async () => {

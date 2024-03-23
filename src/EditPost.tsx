@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import sanitizeHtml from 'sanitize-html';
+import * as DOMPurify from 'dompurify';
 
 const EditPost = () => {
   const navigate = useNavigate();
@@ -12,13 +12,13 @@ const EditPost = () => {
   const [valueHtml, setValueHtml] = useState<string>(state.body);
 
   const handleEditorChange = (value: string) => {
-    const clean = sanitizeHtml(value);
+    const clean = DOMPurify.sanitize(value);
     setValueHtml(clean);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    const clean = sanitizeHtml(value);
+    const clean = DOMPurify.sanitize(value);
     setPostTitle(clean);
   };
 
@@ -171,5 +171,5 @@ export default EditPost;
 /*
 !TODO
 ![] should be able to see the previous title and text from post
-![] should be able to see the previous comment in the comments 
+![] should be able to see the previous comment in the comments
 */
