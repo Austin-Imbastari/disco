@@ -106,7 +106,7 @@ const SignUp = () => {
           }),
         });
         if (!response.ok) {
-          throw new Error('Failed to sign in');
+          throw new Error('Failed to sign up');
         }
         const { data } = await response.json();
         const token = data.token;
