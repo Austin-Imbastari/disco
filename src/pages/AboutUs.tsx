@@ -1,7 +1,7 @@
-import ProgrammingSvg from './assets/img/computer.svg';
-import ComputerSvg from './assets/img/programming.svg';
-import Jiggy from './assets/img/jiggy.jpeg';
-import Good from './assets/img/good.jpeg';
+import ProgrammingSvg from '../assets/img/computer.svg';
+import ComputerSvg from '../assets/img/programming.svg';
+import Jiggy from '../assets/img/jiggy.jpeg';
+import Good from '../assets/img/good.jpeg';
 import { motion } from 'framer-motion';
 import {
   aboutUsAnimation,
@@ -9,7 +9,7 @@ import {
   fadeDescription,
   fadeSvg,
   profilePicAnimation,
-} from './animations';
+} from '../utils/animations';
 
 const AboutUs = () => {
   return (

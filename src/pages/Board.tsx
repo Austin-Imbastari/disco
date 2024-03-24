@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BoardPostItem } from './BoardPostItem';
+import { BoardPostItem } from '../components/BoardPostItem';
 import { motion } from 'framer-motion';
-import { boardItemAnimation, itemsBoard } from './animations';
+import { boardItemAnimation, itemsBoard } from '../utils/animations';
 
 type PostData = {
   id: number;

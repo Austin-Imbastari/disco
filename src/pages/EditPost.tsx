@@ -1,17 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import * as DOMPurify from 'dompurify';
+import DOMPurify from 'dompurify';
 
-import { motion } from 'framer-motion';
-import { createPostAnimation } from './animations';
-
-const CreatePost = () => {
+const EditPost = () => {
   const navigate = useNavigate();
-  const [postTitle, setPostTitle] = useState<string>('');
-  const [valueHtml, setValueHtml] = useState<string>('');
+  const { state } = useLocation();
+  const [postTitle, setPostTitle] = useState<string>(state.title);
+  const [valueHtml, setValueHtml] = useState<string>(state.body);
 
   const handleEditorChange = (value: string) => {
     const clean = DOMPurify.sanitize(value);
@@ -54,37 +52,38 @@ const CreatePost = () => {
       authorId: currentUser.id,
     };
 
-    if (postTitle.length >= 100 || postTitle.length <= 5) {
-      alert('Title can only have 100 characters and more than 5 characters');
-      setPostTitle('');
-    } else {
-      const postCreateResponse = await fetch(
-        'https://disco-app-7sxty.ondigitalocean.app/api/posts',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('auth')}`,
+    try {
+      if (postTitle.length >= 100 || postTitle.length <= 5) {
+        alert('Title can only have 100 characters and more than 5 characters');
+        setPostTitle('');
+      } else {
+        const postCreateResponse = await fetch(
+          `https://disco-app-7sxty.ondigitalocean.app/api/posts/${state.postId}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('auth')}`,
+            },
+            body: JSON.stringify(newPost),
           },
-          body: JSON.stringify(newPost),
-        },
-      );
-
-      const { data: createdPostData } = await postCreateResponse.json();
-      const post = createdPostData.post;
-      if (post) {
-        navigate(`/post/${post.id}`);
+        );
+        if (!postCreateResponse.ok) {
+          throw new Error(
+            `Failed to update post: ${postCreateResponse.statusText}`,
+          );
+        }
+        navigate(`/post/${state.postId}`);
       }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
     <>
       <div className="mt-20"></div>
-      <motion.div
-        variants={createPostAnimation}
-        initial="hidden"
-        animate="show"
+      <div
         style={{
           border: '2.5px solid #E8F2FE',
           borderRadius: '10px',
@@ -120,18 +119,14 @@ const CreatePost = () => {
           <form onSubmit={handleSubmit}>
             <div className="container mt-1 mx-auto px-8 relative h-16">
               <div className="absolute bottom-0 right-0 ">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200"
-                >
-                  Submit Post
-                </motion.button>
+                <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
+                  Update Post
+                </button>
               </div>
             </div>
           </form>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };
@@ -171,4 +166,10 @@ const formats = [
   'video',
 ];
 
-export default CreatePost;
+export default EditPost;
+
+/*
+!TODO
+![] should be able to see the previous title and text from post
+![] should be able to see the previous comment in the comments
+*/

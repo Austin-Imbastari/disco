@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import { MdDelete } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa';
-import { CommentType } from './PostPage';
-import { UserContext } from './UserContext';
+import { CommentType } from '../pages/Post';
+import { UserContext } from '../contexts/UserContext';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 

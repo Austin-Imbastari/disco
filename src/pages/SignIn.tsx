@@ -95,7 +95,7 @@ const SignIn = () => {
         credentials.password.length >= 6
       ) {
         const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
-        const response = await fetch(`${productionUrl}/api/auth/signup`, {
+        const response = await fetch(`${productionUrl}/api/auth/signin`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
