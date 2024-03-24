@@ -27,7 +27,7 @@ const CommentForm = ({
       setComment('');
     } else {
       try {
-        const url = 'https://disco-app-7sxty.ondigitalocean.app/api/comments';
+        const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/comments`;
         const response = await fetch(url, {
           method: 'POST',
           headers: {

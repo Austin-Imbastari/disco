@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const fetchUsers = async () => {
     try {
-      const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
+      const productionUrl = `${import.meta.env.VITE_PRODUCTION_URL}`;
       const response = await fetch(`${productionUrl}/api/users/current`, {
         method: 'GET',
         headers: {

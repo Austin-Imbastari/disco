@@ -48,7 +48,9 @@ const Post = () => {
 
   const getComments = useCallback(async () => {
     try {
-      const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}/comments`;
+      const url = `${
+        import.meta.env.VITE_PRODUCTION_URL
+      }/api/posts/${postId}/comments`;
       const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,
@@ -86,7 +88,9 @@ const Post = () => {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}`;
+        const url = `${
+          import.meta.env.VITE_PRODUCTION_URL
+        }/api/posts/${postId}`;
         const res = await fetch(url);
         const { data: postData } = await res.json();
         const post = postData.post;
@@ -117,7 +121,7 @@ const Post = () => {
 
     try {
       const response = await fetch(
-        `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}`,
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/posts/${postId}`,
         {
           method: 'DELETE',
           headers: {

@@ -41,7 +41,7 @@ const SignUp = () => {
     }));
     try {
       const response = await fetch(
-        'https://disco-app-7sxty.ondigitalocean.app/api/auth/signin/demo-user',
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/auth/signin/demo-user`,
         {
           method: 'POST',
         },
@@ -65,7 +65,7 @@ const SignUp = () => {
 
     try {
       const response = await fetch(
-        'https://disco-app-7sxty.ondigitalocean.app/api/auth/signin/demo-admin',
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/auth/signin/demo-admin`,
         {
           method: 'POST',
         },
@@ -94,7 +94,7 @@ const SignUp = () => {
         regex.test(credentials.username) &&
         credentials.password.length >= 6
       ) {
-        const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
+        const productionUrl = `${import.meta.env.VITE_PRODUCTION_URL}`;
         const response = await fetch(`${productionUrl}/api/auth/signup`, {
           method: 'POST',
           headers: {

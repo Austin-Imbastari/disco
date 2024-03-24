@@ -23,7 +23,9 @@ const CommentList = ({
 
   const handleDeleteComment = async (commentId: number) => {
     try {
-      const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
+      const url = `${
+        import.meta.env.VITE_PRODUCTION_URL
+      }/api/comments/${commentId}`;
       const response = await fetch(url, {
         method: 'DELETE',
         headers: {
@@ -56,7 +58,9 @@ const CommentList = ({
       if (edittedComment.length === 0) {
         return;
       }
-      const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
+      const url = `${
+        import.meta.env.VITE_PRODUCTION_URL
+      }/api/comments/${commentId}`;
       const response = await fetch(url, {
         method: 'PUT',
         headers: {

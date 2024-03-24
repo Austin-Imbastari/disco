@@ -30,7 +30,7 @@ const EditPost = () => {
       return;
     }
 
-    const productionUrl = 'https://disco-app-7sxty.ondigitalocean.app';
+    const productionUrl = `${import.meta.env.VITE_PRODUCTION_URL}`;
 
     const currentUserGetResponse = await fetch(
       `${productionUrl}/api/users/current`,
@@ -58,7 +58,7 @@ const EditPost = () => {
         setPostTitle('');
       } else {
         const postCreateResponse = await fetch(
-          `https://disco-app-7sxty.ondigitalocean.app/api/posts/${state.postId}`,
+          `${import.meta.env.VITE_PRODUCTION_URL}/api/posts/${state.postId}`,
           {
             method: 'PUT',
             headers: {

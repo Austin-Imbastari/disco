@@ -20,8 +20,8 @@ const Board = () => {
 
   const handleFetchItems = async () => {
     try {
-      const url =
-        'https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts';
+      const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/boards/1/posts`;
+      console.log(url);
       const res = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,
