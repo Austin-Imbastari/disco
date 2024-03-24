@@ -21,7 +21,6 @@ const Board = () => {
   const handleFetchItems = async () => {
     try {
       const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/boards/1/posts`;
-      console.log(url);
       const res = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,
