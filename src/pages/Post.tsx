@@ -2,12 +2,12 @@ import { motion } from 'framer-motion';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { UserContext } from './UserContext';
+import { UserContext } from '../contexts/UserContext';
 
-import CommentForm from './CommentForm';
-import CommentList from './CommentList';
+import CommentForm from '../components/CommentForm';
+import CommentList from '../components/CommentList';
 
-import { postPageAnimation } from './animations';
+import { postPageAnimation } from '../utils/animations';
 
 export type PostType = {
   id: number;
@@ -38,7 +38,7 @@ export type ResponseCommentType = {
   updatedAt: string;
 };
 
-const PostPage = () => {
+const Post = () => {
   const { id: postId } = useParams();
   const navigate = useNavigate();
   const currentUser = useContext(UserContext);
@@ -48,7 +48,9 @@ const PostPage = () => {
 
   const getComments = useCallback(async () => {
     try {
-      const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}/comments`;
+      const url = `${
+        import.meta.env.VITE_PRODUCTION_URL
+      }/api/posts/${postId}/comments`;
       const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,
@@ -86,7 +88,9 @@ const PostPage = () => {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const url = `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}`;
+        const url = `${
+          import.meta.env.VITE_PRODUCTION_URL
+        }/api/posts/${postId}`;
         const res = await fetch(url);
         const { data: postData } = await res.json();
         const post = postData.post;
@@ -117,7 +121,7 @@ const PostPage = () => {
 
     try {
       const response = await fetch(
-        `https://disco-app-7sxty.ondigitalocean.app/api/posts/${postId}`,
+        `${import.meta.env.VITE_PRODUCTION_URL}/api/posts/${postId}`,
         {
           method: 'DELETE',
           headers: {
@@ -210,4 +214,4 @@ const PostPage = () => {
   );
 };
 
-export default PostPage;
+export default Post;

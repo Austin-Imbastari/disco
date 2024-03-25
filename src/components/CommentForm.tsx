@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { UserContext } from './UserContext';
+import { UserContext } from '../contexts/UserContext';
 import { motion } from 'framer-motion';
 
 const CommentForm = ({
@@ -27,7 +27,7 @@ const CommentForm = ({
       setComment('');
     } else {
       try {
-        const url = 'https://disco-app-7sxty.ondigitalocean.app/api/comments';
+        const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/comments`;
         const response = await fetch(url, {
           method: 'POST',
           headers: {

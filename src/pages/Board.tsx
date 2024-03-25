@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BoardPostItem } from './BoardPostItem';
+import { BoardPostItem } from '../components/BoardPostItem';
 import { motion } from 'framer-motion';
-import { boardItemAnimation, itemsBoard } from './animations';
+import { boardItemAnimation, itemsBoard } from '../utils/animations';
 
 type PostData = {
   id: number;
@@ -20,8 +20,7 @@ const Board = () => {
 
   const handleFetchItems = async () => {
     try {
-      const url =
-        'https://disco-app-7sxty.ondigitalocean.app/api/boards/1/posts';
+      const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/boards/1/posts`;
       const res = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('auth')}`,

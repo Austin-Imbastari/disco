@@ -5,9 +5,9 @@ import AboutUs from './AboutUs';
 import Board from './Board';
 import CreatePost from './CreatePost';
 import EditPost from './EditPost';
-import LogOut from './Navbar/LogOutButton';
-import Navbar from './Navbar/Navbar';
-import PostPage from './PostPage';
+import LogOut from '../components/Navbar/LogOutButton';
+import Navbar from '../components/Navbar/Navbar';
+import Post from './Post';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
@@ -25,7 +25,7 @@ const Home = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/logout" element={<LogOut />} />
           <Route path="/createpost" element={<CreatePost />} />
-          <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/post/:id" element={<Post />} />
           <Route path="/post/:id/edit" element={<EditPost />} />
         </Routes>
       </AnimatePresence>

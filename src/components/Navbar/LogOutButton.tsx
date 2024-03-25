@@ -7,7 +7,7 @@ const LogOutButton = () => {
     e.preventDefault();
 
     try {
-      const url = 'https://disco-app-7sxty.ondigitalocean.app/api/auth/signout';
+      const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/auth/signout`;
 
       const response = await fetch(url, {
         method: 'POST',

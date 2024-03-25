@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import { MdDelete } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md';
 import { FaCheck } from 'react-icons/fa';
-import { CommentType } from './PostPage';
-import { UserContext } from './UserContext';
+import { CommentType } from '../pages/Post';
+import { UserContext } from '../contexts/UserContext';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -23,7 +23,9 @@ const CommentList = ({
 
   const handleDeleteComment = async (commentId: number) => {
     try {
-      const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
+      const url = `${
+        import.meta.env.VITE_PRODUCTION_URL
+      }/api/comments/${commentId}`;
       const response = await fetch(url, {
         method: 'DELETE',
         headers: {
@@ -56,7 +58,9 @@ const CommentList = ({
       if (edittedComment.length === 0) {
         return;
       }
-      const url = `https://disco-app-7sxty.ondigitalocean.app/api/comments/${commentId}`;
+      const url = `${
+        import.meta.env.VITE_PRODUCTION_URL
+      }/api/comments/${commentId}`;
       const response = await fetch(url, {
         method: 'PUT',
         headers: {
