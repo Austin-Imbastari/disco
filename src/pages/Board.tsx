@@ -57,7 +57,7 @@ const Board = () => {
   return (
     <>
       <div className="container mt-10 mx-auto px-8 relative h-16 ">
-        <div className="absolute bottom-0 right-0">
+        <div className="absolute bottom-0 right-0 ">
           <Link to="/createpost">
             <motion.button
               whileHover={{ scale: 1.1 }}

@@ -67,7 +67,7 @@ const CommentForm = ({
             onChange={onChangeHandler}
             value={comment}
             style={{ resize: 'none', outline: 'none' }}
-            className="block mb-4 p-2.5 w-1/2 text-md text-gray-900 bg-gray-50 rounded-lg border h-40 dark:bg-darkBg dark:text-white"
+            className="block mb-4 p-2.5 w-1/2 text-md text-gray-900 bg-gray-50 rounded-lg border h-40 dark:bg-[#1D2023] dark:text-white"
             placeholder="Add a comment here... "
             disabled={comment.length >= 350}
           ></textarea>

@@ -109,7 +109,7 @@ const CreatePost = () => {
         </div>
         <div>
           <ReactQuill
-            className="dark:text-white"
+            className="dark:text-white dark:bg-[#1d202362]"
             onChange={handleEditorChange}
             value={valueHtml}
             formats={formats}
