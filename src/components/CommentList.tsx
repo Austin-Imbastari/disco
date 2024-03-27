@@ -6,6 +6,7 @@ import { CommentType } from '../pages/Post';
 import { UserContext } from '../contexts/UserContext';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { boardItemAnimation, itemsBoard } from '../utils/animations';
 
 const CommentList = ({
   comments,
@@ -82,8 +83,15 @@ const CommentList = ({
   return (
     <>
       {comments?.map((comment) => (
-        <div key={comment.commentId}>
-          <div className="mt-10 flex justify-center">
+        <motion.div
+          variants={boardItemAnimation}
+          initial={false}
+          key={comment.commentId}
+        >
+          <motion.div
+            variants={itemsBoard}
+            className="mt-10 flex justify-center"
+          >
             <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg w-2/12 dark:bg-darkBg dark:text-white">
               <div className="relative flex gap-4">
                 <div className="flex flex-col w-full">
@@ -158,8 +166,8 @@ const CommentList = ({
                 )}
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       ))}
     </>
   );
