@@ -92,7 +92,7 @@ const CommentList = ({
             variants={itemsBoard}
             className="mt-10 flex justify-center"
           >
-            <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg w-2/12 dark:bg-darkBg dark:text-white">
+            <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg w-2/12 dark:bg-[#1d232a] dark:text-white">
               <div className="relative flex gap-4">
                 <div className="flex flex-col w-full">
                   <div className="flex flex-row justify-between items-center">
@@ -143,7 +143,7 @@ const CommentList = ({
                       <textarea
                         onChange={(e) => setEdittedComment(e.target.value)}
                         value={edittedComment}
-                        className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 dark:bg-[#1D2023] dark:text-white outline-none"
+                        className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 dark:bg-[#1D2023] dark:text-white outline:none"
                         name="body"
                         placeholder="comment..."
                         required

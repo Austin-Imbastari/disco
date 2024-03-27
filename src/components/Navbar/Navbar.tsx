@@ -86,7 +86,7 @@ const Navbar = ({
   }, []);
 
   return (
-    <div className="border-b-[2.5px] border-b-[#e9f7e6] dark:border-b-darkP dark:bg-darkBg">
+    <div className="border-b-[2.5px] border-b-[#e9f7e6] dark:border-b-darkP dark:bg-[#1d232a]">
       <div className="mx-auto container">
         <div className="relative pt-8 pb-8 ">
           <nav className="relative flex items-center justify-between sm:h-10 md:justify-center">
