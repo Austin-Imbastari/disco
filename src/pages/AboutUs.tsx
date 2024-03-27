@@ -24,7 +24,7 @@ const AboutUs = () => {
           className="mt-20 mb-20 text-3xl font-bold"
           variants={titleAnimation}
         >
-          <h1 className="text-center ">About Us</h1>
+          <h1 className="text-center dark:text-white">About Us</h1>
         </motion.div>
         <motion.div variants={fadeSvg} className="flex justify-center">
           <img src={ProgrammingSvg} alt="programming" />
@@ -34,7 +34,7 @@ const AboutUs = () => {
             <div>
               <motion.p
                 variants={fadeDescription}
-                className="tracking-wider text-center"
+                className="tracking-wider text-center dark:text-white"
               >
                 Step into our vibrant blog site, where every click unveils
                 captivating developer tips and delightful discoveries. From
@@ -53,7 +53,7 @@ const AboutUs = () => {
               <br></br>
               <motion.p
                 variants={fadeDescription}
-                className="tracking-wider text-center"
+                className="tracking-wider text-center dark:text-white"
               >
                 Engage with like-minded individuals in our welcoming space.
                 Share dev tips, swap recipes, or offer words of encouragement as
@@ -61,7 +61,7 @@ const AboutUs = () => {
               </motion.p>
             </div>
             <motion.div variants={fadeDescription} className="mt-10">
-              <h1 className="text-2xl font-medium rainbow-text">
+              <h1 className="text-2xl font-medium rainbow-text ">
                 Meet Our Team
               </h1>
             </motion.div>
@@ -70,19 +70,19 @@ const AboutUs = () => {
                 <a href="https://github.com/jpnws" target="_blank">
                   <motion.img
                     variants={profilePicAnimation}
-                    className="rounded-full scale-75"
+                    className="rounded-full scale-75 mb-2"
                     src={Jiggy}
                     alt="Jiggy"
                   />
                   <motion.h4
                     variants={profilePicAnimation}
-                    className="text-center text-2xl font-medium"
+                    className="text-center text-2xl font-medium dark:text-white"
                   >
                     Ji
                   </motion.h4>
                   <motion.p
                     variants={profilePicAnimation}
-                    className="text-center mt-2 tracking-wider font-light	"
+                    className="text-center mt-2 tracking-wider font-light	dark:text-white"
                   >
                     Software Developer
                   </motion.p>
@@ -92,19 +92,19 @@ const AboutUs = () => {
                 <a href="https://github.com/Austin-Imbastari" target="_blank">
                   <motion.img
                     variants={profilePicAnimation}
-                    className="rounded-full scale-75"
+                    className="rounded-full scale-75 mb-2"
                     src={Good}
                     alt="Good"
                   />
                   <motion.h4
                     variants={profilePicAnimation}
-                    className="text-center text-2xl font-medium"
+                    className="text-center text-2xl font-medium dark:text-white"
                   >
                     Good
                   </motion.h4>
                   <motion.p
                     variants={profilePicAnimation}
-                    className="text-center mt-2 tracking-wider font-light	"
+                    className="text-center mt-2 tracking-wider font-light	dark:text-white"
                   >
                     Frontend Developer
                   </motion.p>

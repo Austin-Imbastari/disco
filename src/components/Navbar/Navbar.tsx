@@ -12,7 +12,13 @@ import SignUpButton from './SignUpButton';
 
 import { UserProps } from './types';
 
-const Navbar = () => {
+const Navbar = ({
+  handleThemeSwitch,
+  theme,
+}: {
+  handleThemeSwitch: () => void;
+  theme: string;
+}) => {
   const [user, setUser] = useState<UserProps>();
 
   const fetchUsers = async () => {
@@ -42,16 +48,16 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="border-b-[2.5px] border-b-[#e9f7e6]">
+    <div className="border-b-[2.5px] border-b-[#e9f7e6] dark:border-b-darkP dark:bg-darkBg">
       <div className="mx-auto container">
         <div className="relative pt-8 pb-8 ">
           <nav className="relative flex items-center justify-between sm:h-10 md:justify-center">
             <div className="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
-              <div className="flex items-center justify-between w-full md:w-auto">
+              <div className="flex items-center justify-between w-full md:w-auto ">
                 <NavLink to="/">
                   <DiscoLogo />
                 </NavLink>
-                <div className="flex items-center -mr-2 md:hidden">
+                <div className="flex items-center -mr-2 md:hidden ">
                   <MenuButton />
                 </div>
               </div>
@@ -75,6 +81,12 @@ const Navbar = () => {
                       <SignInButton />
                     </>
                   )}
+                  <button
+                    onClick={handleThemeSwitch}
+                    className="bg-mint text-black px-5 py-2 rounded-full border-solid border-2  hover:bg-azure tracking-wide transition-colors duration-200 dark:text-black dark:bg-darkP "
+                  >
+                    <span>{theme === 'dark' ? 'light' : 'dark'}</span>
+                  </button>
                 </div>
               </div>
             </div>
