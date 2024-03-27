@@ -14,14 +14,9 @@ import SignUp from './SignUp';
 
 const Home = () => {
   const location = useLocation();
-  const [theme, setTheme] = useState<string>('');
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
+  const [theme, setTheme] = useState<string>(
+    localStorage.getItem('theme') || 'light',
+  );
 
   useEffect(() => {
     if (theme === 'dark') {
