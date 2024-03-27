@@ -67,7 +67,7 @@ const CommentForm = ({
             onChange={onChangeHandler}
             value={comment}
             style={{ resize: 'none', outline: 'none' }}
-            className="block mb-4 p-2.5 w-1/2 text-md text-gray-900 bg-gray-50 rounded-lg border h-40"
+            className="block mb-4 p-2.5 w-1/2 text-md text-gray-900 bg-gray-50 rounded-lg border h-40 dark:bg-darkBg dark:text-white"
             placeholder="Add a comment here... "
             disabled={comment.length >= 350}
           ></textarea>
@@ -78,7 +78,7 @@ const CommentForm = ({
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200"
+                  className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 dark:border-black dark:text-black dark:bg-darkP"
                 >
                   Comment
                 </motion.button>

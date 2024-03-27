@@ -158,11 +158,15 @@ const Post = () => {
         <div>
           {postInfo?.map((post) => (
             <div key={post.id}>
-              <h1 className="mb-1 font-bold text-xl">{post.subject}</h1>
-              <h4>{dateFormatter(post.createdAt)}</h4>
+              <h1 className="mb-1 font-bold text-xl dark:text-white">
+                {post.subject}
+              </h1>
+              <h4 className="dark:text-white">
+                {dateFormatter(post.createdAt)}
+              </h4>
               <div className="mt-5">
                 <p
-                  className="leading-8 "
+                  className="leading-8 dark:text-white"
                   dangerouslySetInnerHTML={{ __html: post.text }}
                 />
               </div>
@@ -171,7 +175,7 @@ const Post = () => {
                   {(currentUser.role === 'ADMIN' ||
                     currentUser.id === post.author.id) && (
                     <form onSubmit={(e) => handleDelete(e, post.id)}>
-                      <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
+                      <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 dark:bg-darkP dark:border-black">
                         Delete
                       </button>{' '}
                     </form>
@@ -185,7 +189,7 @@ const Post = () => {
                         postId: post.id,
                       }}
                     >
-                      <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2">
+                      <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 mr-2 dark:bg-darkP dark:border-black">
                         Edit
                       </button>
                     </Link>

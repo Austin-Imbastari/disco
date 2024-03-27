@@ -93,21 +93,22 @@ const EditPost = () => {
       >
         <div>
           <div className="flex items-center justify-between">
-            <h1 className="mb-2 font-bold text-xl">Title</h1>
-            <span className="font-thin text-sm text-gray-600">
+            <h1 className="mb-2 font-bold text-xl dark:text-white">Title</h1>
+            <span className="font-thin text-sm text-gray-600 dark:text-white">
               {postTitle.length}/100
             </span>
           </div>
           <textarea
             onChange={handleTitleChange}
             style={{ resize: 'none', outline: 'none' }}
-            className="block mb-4 p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border h-10"
+            className="block mb-4 p-2.5 w-full text-md text-gray-900 bg-gray-50 rounded-lg border h-10 dark:bg-darkA dark:text-white"
             value={postTitle}
             disabled={postTitle.length >= 100}
           ></textarea>
         </div>
         <div>
           <ReactQuill
+            className="dark:text-white"
             onChange={handleEditorChange}
             value={valueHtml}
             formats={formats}
@@ -119,7 +120,7 @@ const EditPost = () => {
           <form onSubmit={handleSubmit}>
             <div className="container mt-1 mx-auto px-8 relative h-16">
               <div className="absolute bottom-0 right-0 ">
-                <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200">
+                <button className="bg-mint text-black px-2 py-2 rounded-md border-solid border-2 border-azure hover:bg-azure tracking-wide transition-colors duration-200 dark:bg-darkP dark:border-black">
                   Update Post
                 </button>
               </div>

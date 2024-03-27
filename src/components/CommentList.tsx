@@ -84,7 +84,7 @@ const CommentList = ({
       {comments?.map((comment) => (
         <div key={comment.commentId}>
           <div className="mt-10 flex justify-center">
-            <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg w-2/12">
+            <div className="relative grid grid-cols-1 gap-4 p-4 mb-8 border rounded-lg bg-white shadow-lg w-2/12 dark:bg-darkBg dark:text-white">
               <div className="relative flex gap-4">
                 <div className="flex flex-col w-full">
                   <div className="flex flex-row justify-between items-center">
@@ -111,7 +111,7 @@ const CommentList = ({
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
                     onClick={() => handleDeleteComment(comment.commentId)}
-                    className="ml-2 hover:cursor-pointer"
+                    className="ml-2 hover:cursor-pointer dark:text-darkP"
                   >
                     {currentUser?.username === comment.author ||
                     currentUser?.role === 'ADMIN' ? (
@@ -124,7 +124,7 @@ const CommentList = ({
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.8 }}
                     onClick={() => handleEditComment(comment.commentId)}
-                    className="ml-2 hover:cursor-pointer"
+                    className="ml-2 hover:cursor-pointer dark:text-darkP"
                   >
                     {currentUser?.username === comment.author ? <MdEdit /> : ''}
                   </motion.div>
@@ -138,7 +138,7 @@ const CommentList = ({
                         style={{
                           border: '1px solid blue',
                         }}
-                        className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700"
+                        className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 dark:bg-darkBg dark:text-white dark:focus:border-white "
                         name="body"
                         placeholder="comment..."
                         required
@@ -147,7 +147,7 @@ const CommentList = ({
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.8 }}
                         onClick={() => handleEditComment(comment.commentId)}
-                        className="mt-2 flex justify-center hover:cursor-pointer"
+                        className="mt-2 flex justify-center hover:cursor-pointer dark:text-darkP"
                       >
                         <FaCheck />
                       </motion.div>

@@ -31,7 +31,7 @@ const LogOutButton = () => {
   return (
     <>
       <form onSubmit={handleOnSubmit}>
-        <button className="bg-mint text-black px-5 py-2 rounded-full border-solid border-2  hover:bg-azure tracking-wide transition-colors duration-200">
+        <button className="bg-mint text-black px-5 py-2 rounded-full border-solid border-2  hover:bg-azure tracking-wide transition-colors duration-200 dark:text-black dark:bg-darkP ">
           Log Out
         </button>
       </form>

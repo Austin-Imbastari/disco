@@ -13,12 +13,16 @@ export const BoardPostItem = ({
         <div className="flex justify-between px-4 py-10">
           <div style={{ width: '100%' }} className="flex flex-col">
             <div className="flex items-center justify-between ">
-              <h1 className="text-2xl font-bold tracking-wide">{subject}</h1>
+              <h1 className="text-2xl font-bold tracking-wide dark:text-white">
+                {subject}
+              </h1>
               <div>
-                <h1 className="text-l font-medium">{author}</h1>
+                <h1 className="text-l font-medium dark:text-white">{author}</h1>
               </div>
             </div>
-            <p className="font-light tracking-wide">{createdDate}</p>
+            <p className="font-light tracking-wide dark:text-white">
+              {createdDate}
+            </p>
           </div>
         </div>
       </div>

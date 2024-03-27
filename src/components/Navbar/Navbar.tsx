@@ -109,7 +109,9 @@ const Navbar = ({
                 <div className="bg-red inline-flex items-center px-4 py-2 text-base text-gray-900  border border-white rounded-full   ">
                   {user && (
                     <div className="flex gap-4 items-center">
-                      <span>Welcome, {user.username}</span>
+                      <span className="dark:text-white">
+                        Welcome, {user.username}
+                      </span>
                       <LogOutButton />
                     </div>
                   )}
