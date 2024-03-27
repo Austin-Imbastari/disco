@@ -1,6 +1,6 @@
 # Disco Blog
 
-Disco is a Single Page Application (SPA) discussion board, providing a basic yet
+Disco is a fullstack application discussion board, providing a basic yet
 functional platform for users to engage in discussions. It enables registered
 users to create, edit, and remove their posts and comments. Additionally, Disco
 allows its administrators with the authority to remove any user-generated posts
@@ -30,8 +30,11 @@ or comments.
 
 ## Features
 
-- User can configure SoundBoks with different colors. (Grill, Volume Knob, Strap, & Body)
-- User can adjust the speed of which the SoundBoks are going.
+- User can create post.
+- User can view users post.
+- User can delete/edit post & comments.
+- User can Sign In & Sign Out
+- User can switch to light dark mode.
 
 ## Development
 
