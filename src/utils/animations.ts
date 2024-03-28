@@ -32,7 +32,7 @@ export const postPageAnimation = {
     transition: {
       duration: 0.5,
       when: 'beforeChildren',
-      staggerChildren: 0.25,
+      staggerChildren: 0.26,
     },
   },
   exit: {
