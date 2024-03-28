@@ -132,7 +132,7 @@ const Post = () => {
 
       if (response.status === 202) {
         console.log('Resource deleted successfully');
-        navigate('/*');
+        navigate('/');
       }
     } catch (err) {
       console.log('Post was not deleted', err);

@@ -49,7 +49,7 @@ const SignIn = () => {
       if (response.ok) {
         const { data } = await response.json();
         localStorage.setItem('auth', data.token);
-        navigate('/*');
+        navigate('/');
         window.location.reload();
       }
     } catch (err) {
@@ -73,7 +73,7 @@ const SignIn = () => {
       if (response.ok) {
         const { data } = await response.json();
         localStorage.setItem('auth', data.token);
-        navigate('/*');
+        navigate('/');
         window.location.reload();
       }
     } catch (err) {
@@ -118,7 +118,7 @@ const SignIn = () => {
           username: '',
           password: '',
         });
-        navigate('/*');
+        navigate('/');
         window.location.reload();
       } else if (!userType.demoUser && !userType.adminUser) {
         alert(

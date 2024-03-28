@@ -19,7 +19,7 @@ const LogOutButton = () => {
       if (response.ok) {
         localStorage.removeItem('auth');
         window.location.reload();
-        navigate('/*');
+        navigate('/');
       } else {
         console.error('POST request failed with status:', response.status);
       }
