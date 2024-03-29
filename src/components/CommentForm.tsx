@@ -37,8 +37,7 @@ const CommentForm = ({
           body: JSON.stringify(newComment),
         });
         if (response.ok) {
-          const data = await response.json();
-          console.log('Comment submitted successfully:', data);
+          console.log('Comment submitted successfully');
           onCommentSubmitted();
           setComment('');
         } else {

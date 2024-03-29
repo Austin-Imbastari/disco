@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LogOutButton = () => {
@@ -5,10 +6,8 @@ const LogOutButton = () => {
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const url = `${import.meta.env.VITE_PRODUCTION_URL}/api/auth/signout`;
-
       const response = await fetch(url, {
         method: 'POST',
         headers: {
